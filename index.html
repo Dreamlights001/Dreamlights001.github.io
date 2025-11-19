@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>王宇琛 · 智能制造 × AI</title>
+  <meta name="description" content="吉林大学 智能制造工程（主修） + 计算机科学与技术（辅修） | 图神经网络 | 多模态视觉大模型 | 工业瑕疵检测 | 网络安全">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <style>
+    :root { --primary: #005bff; --dark: #121212; --light: #f8f9fa;}
+    @media (prefers-color-scheme: dark) {
+      body { background:#0d1117; color:#c9d1d9; }
+      .card, .nav-pills .nav-link { background:#161b22; border-color:#30363d; }
+      .nav-pills .nav-link.active { background:#005bff; }
+    }
+    body { font-family: "MiSans", -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.75; }
+    .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .fixed-left { position: fixed; top: 0; left: 0; width: 280px; height: 100vh; overflow-y: auto; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-right: 1px solid #eee; }
+    .main-content { margin-left: 280px; padding: 2rem; }
+    .project-card { transition: all 0.3s; border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+    .skill-bar { height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden; }
+    .skill-progress { height: 100%; background: var(--primary); border-radius: 4px; }
+    @media (max-width: 992px) {
+      .fixed-left { position: static; width: 100%; height: auto; }
+      .main-content { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 左侧导航 + 个人信息 -->
+  <div class="fixed-left p-4 d-flex flex-column">
+    <div class="text-center mb-4">
+      <img src="/photo.jpg" class="rounded-circle" width="160" height="160" alt="王宇琛">
+      <h2 class="mt-3 mb-1 hero fw-bold">王宇琛</h2>
+      <p class="text-muted">智能制造 × 多模态AI</p>
+    </div>
+    <ul class="nav nav-pills flex-column gap-2">
+      <li class="nav-item"><a class="nav-link active" href="#profile">概览</a></li>
+      <li class="nav-item"><a class="nav-link" href="#education">教育</a></li>
+      <li class="nav-item"><a class="nav-link" href="#projects">科研项目</a></li>
+      <li class="nav-item"><a class="nav-link" href="#awards">奖项</a></li>
+      <li class="nav-item"><a class="nav-link" href="#skills">技能</a></li>
+      <li class="nav-item"><a class="nav-link" href="#contact">联系</a></li>
+    </ul>
+    <div class="mt-auto pt-4 text-center">
+      <p><i class="ti ti-mail"></i> 16627863893@163.com</p>
+      <p><i class="ti ti-phone"></i> 16627863893</p>
+      <p><i class="ti ti-map-pin"></i> 长春 · 吉林大学南岭校区</p>
+      <div class="mt-3">
+        <a href="https://github.com/Dreamlights001" class=" target="_blank" class="text-dark mx-2"><i class="ti ti-brand-github ti-lg"></i></a>
+        <a href="https://space.bilibili.com/3493264265771133" target="_blank" class="text-dark mx-2"><i class="ti ti-brand-bilibili ti-lg"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右侧主内容 -->
+  <div class="main-content">
+    <section id="profile" class="mb-5">
+      <h2 class="border-bottom pb-2">个人简介</h2>
+      <p class="lead">吉林大学智能制造工程（主修）+ 计算机科学与技术（辅修）本科在读，核心竞争力在于「机械工程」×「计算机视觉」×「多模态大模型」的跨学科实战能力。目前主攻零样本/少样本工业瑕疵检测与图神经网络漏洞检测，拥有多项国赛一等奖与SOTA项目经历。</p>
+      <p>前8学期成绩 86.0，专业排名 9/30，CET-6 480。</p>
+    </section>
+
+    <section id="education" class="mb-5">
+      <h2 class="border-bottom pb-2">教育经历</h2>
+      <div class="timeline position-relative">
+        <div class="mb-4 position-relative ps-5">
+          <div class="position-absolute start-0 translate-middle-x bg-primary rounded-circle" style="width:12px;height:12px;"></div>
+          <strong>2023.09 – 至今</strong>　吉林大学 · 智能制造工程（本科主修）
+          <p class="text-muted ms-4">机械与航空航天工程学院</p>
+        </div>
+        <div class="mb-4 position-relative ps-5">
+          <div class="position-absolute start-0 translate-middle-x bg-primary rounded-circle" style="width:12px;height:12px;"></div>
+          <strong>2023.08 – 至今</strong>　吉林大学 · 计算机科学与技术（本科辅修）
+        </div>
+        <div class="mb-4 position-relative ps-5">
+          <div class="position-absolute start-0 translate-middle-x bg-secondary rounded-circle" style="width:12px;height:12px;"></div>
+          <strong>2022.08 – 2023.06</strong>　吉林大学 · 地质类（大一）
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="mb-5">
+      <h2 class="border-bottom pb-2">代表性科研项目</h2>
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="card project-card h-100">
+            <div class="card-body">
+              <h5>智能可迁移的跨项目漏洞检测模型</h5>
+              <p class="text-muted small">图神经网络 · 网络安全 · 迁移学习 · 大创项目（第二负责人）</p>
+              <p>将代码转化为CPG（控制流图+程序依赖图），使用GNN进行特征提取，结合迁移学习实现跨项目间漏洞检测迁移。目前已完成基础模型，正在进行消融实验与工程化。</p>
+              <a href="https://github.com/Dreamlights001/myZSAD" target="_blank" class="btn btn-outline-primary btn-sm">GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card project-card h-100">
+            <div class="card-body">
+              <h5>AA-CLIP：零样本工业瑕疵检测（AnoCLIP+改进）</h5>
+              <p class="text-muted small">Zero-Shot · CLIP · 多模态 · MVTec AD</p>
+              <p>在AnoCLIP基础上提出AA-CLIP（Alignment-Augmented CLIP），通过双分支对齐增强与自适应阈值策略，在MVTec AD数据集上超越当前公开SOTA 3.4%（Image-AUROC）。</p>
+              <a href="https://github.com/Dreamlights001/Bearing-CLIP" target="_blank" class="btn btn-outline-primary btn-sm">GitHub</a>
+              <span class="badge bg-danger ms-2">SOTA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="awards" class="mb-5">
+      <h2 class="border-bottom pb-2">主要奖项（近年）</h2>
+      <ul class="list-unstyled">
+        <li class="mb-3"><span class="badge bg-warning text-dark me-2">国一</span> 第25届中国大学生数学竞赛吉林省一等奖</li>
+        <li class="mb-3"><span class="badge bg-warning text-dark me-2">国一</span> 2024中国大学生数学建模竞赛吉林省一等奖</li>
+        <li class="mb-3"><span class="badge bg-success text-white me-2">H奖</span> 2025美国大学生数学建模竞赛 Honorable Mention</li>
+        <li class="mb-3"><span class="badge bg-warning text-dark me-2">国一</span> 第九届中国数据新闻大赛 全国一等奖</li>
+        <li class="mb-3"><span class="badge bg-secondary text-white me-2">校二</span> 2024吉林大学大学生物理竞赛 校二等奖</li>
+      </ul>
+    </section>
+
+    <section id="skills" class="mb-5">
+      <h2 class="border-bottom pb-2">技能</h2>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="d-flex justify-content-between"><span>Python / PyTorch</span><strong>95%</strong></div>
+          <div class="skill-bar"><div class="skill-progress" style="width:95%"></div></div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="d-flex justify-content-between"><span>C/C++</span><strong>85%</strong></div>
+          <div class="skill-bar"><div class="skill-progress" style="width:85%"></div></div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="d-flex justify-content-between"><span>CAD/CATIA/SolidWorks</span><strong>90%</strong></div>
+          <div class="skill-bar"><div class="skill-progress" style="width:90%"></div></div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="d-flex justify-content-between"><span>MATLAB / Simulink</span><strong>88%</strong></div>
+          <div class="skill-bar"><div class="skill-progress" style="width:88%"></div></div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="d-flex justify-content-between"><span>多模态大模型（CLIP/SAM/LLaVA）</span><strong>92%</strong></div>
+          <div class="skill-bar"><div class="skill-progress" style="width:92%"></div></div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="d-flex justify-content-between"><span>PLC / LabVIEW</span><strong>80%</strong></div>
+          <div class="skill-bar"><div class="skill-progress" style="width:80%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="mb-5">
+      <h2 class="border-bottom pb-2">联系我</h2>
+      <p>随时欢迎交流～</p>
+      <p>Email: <a href="mailto:16627863893@163.com">16627863893@163.com</a></p>
+      <p>GitHub: <a href="https://github.com/Dreamlights001" target="_blank">Dreamlights001</a></p>
+      <p>微信同手机号，可直接加</p>
+    </section>
+  </div>
+</body>
+</html>
