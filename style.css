@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+  --color-bg: #050505;
+  --color-panel: #0a0a0a;
+  --color-primary: #00ff88;
+  --color-secondary: #00ccff;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.05);
+}
+
+body {
+  background-color: var(--color-bg);
+  font-family: 'Roboto', sans-serif;
+  color: #e5e5e5;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Utility Classes */
+.neon-text {
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.glow-text {
+    text-shadow: 0 0 10px var(--color-primary);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+.section-pad {
+    min-height: 60vh;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.section-title {
+  position: relative;
+  display: inline-block;
+}
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--color-primary);
+  box-shadow: 0 0 10px var(--color-primary);
+}
+
+/* Navigation Styles */
+.nav-link {
+    position: relative;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--color-primary);
+    transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Mobile Drawer Links */
+.mobile-link {
+    position: relative;
+    overflow: hidden;
+}
+.mobile-link::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    width: 10px;
+    height: 2px;
+    background: var(--color-primary);
+    transform: translateY(-50%) scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: right;
+}
+.mobile-link:hover::before {
+    transform: translateY(-50%) scaleX(1);
+}
+
+/* Three JS Container */
+#three-container canvas {
+    outline: none;
+}

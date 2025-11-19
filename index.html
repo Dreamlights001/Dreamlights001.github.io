@@ -1,163 +1,233 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>王宇琛 · 智能制造 × AI</title>
-  <meta name="description" content="吉林大学 智能制造工程（主修） + 计算机科学与技术（辅修） | 图神经网络 | 多模态视觉大模型 | 工业瑕疵检测 | 网络安全">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-  <style>
-    :root { --primary: #005bff; --dark: #121212; --light: #f8f9fa;}
-    @media (prefers-color-scheme: dark) {
-      body { background:#0d1117; color:#c9d1d9; }
-      .card, .nav-pills .nav-link { background:#161b22; border-color:#30363d; }
-      .nav-pills .nav-link.active { background:#005bff; }
-    }
-    body { font-family: "MiSans", -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.75; }
-    .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .fixed-left { position: fixed; top: 0; left: 0; width: 280px; height: 100vh; overflow-y: auto; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-right: 1px solid #eee; }
-    .main-content { margin-left: 280px; padding: 2rem; }
-    .project-card { transition: all 0.3s; border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-    .project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
-    .skill-bar { height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden; }
-    .skill-progress { height: 100%; background: var(--primary); border-radius: 4px; }
-    @media (max-width: 992px) {
-      .fixed-left { position: static; width: 100%; height: auto; }
-      .main-content { margin-left: 0; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wang Yuchen | AI & CV Engineer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00ff88',
+                        secondary: '#00ccff',
+                        dark: '#050505',
+                        panel: '#0a0a0a'
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <!-- 左侧导航 + 个人信息 -->
-  <div class="fixed-left p-4 d-flex flex-column">
-    <div class="text-center mb-4">
-      <img src="/photo.jpg" class="rounded-circle" width="160" height="160" alt="王宇琛">
-      <h2 class="mt-3 mb-1 hero fw-bold">王宇琛</h2>
-      <p class="text-muted">智能制造 × 多模态AI</p>
-    </div>
-    <ul class="nav nav-pills flex-column gap-2">
-      <li class="nav-item"><a class="nav-link active" href="#profile">概览</a></li>
-      <li class="nav-item"><a class="nav-link" href="#education">教育</a></li>
-      <li class="nav-item"><a class="nav-link" href="#projects">科研项目</a></li>
-      <li class="nav-item"><a class="nav-link" href="#awards">奖项</a></li>
-      <li class="nav-item"><a class="nav-link" href="#skills">技能</a></li>
-      <li class="nav-item"><a class="nav-link" href="#contact">联系</a></li>
-    </ul>
-    <div class="mt-auto pt-4 text-center">
-      <p><i class="ti ti-mail"></i> 16627863893@163.com</p>
-      <p><i class="ti ti-phone"></i> 16627863893</p>
-      <p><i class="ti ti-map-pin"></i> 长春 · 吉林大学南岭校区</p>
-      <div class="mt-3">
-        <a href="https://github.com/Dreamlights001" class=" target="_blank" class="text-dark mx-2"><i class="ti ti-brand-github ti-lg"></i></a>
-        <a href="https://space.bilibili.com/3493264265771133" target="_blank" class="text-dark mx-2"><i class="ti ti-brand-bilibili ti-lg"></i></a>
-      </div>
-    </div>
-  </div>
+<body class="bg-dark text-white antialiased overflow-x-hidden transition-colors duration-300 selection:bg-primary selection:text-black">
 
-  <!-- 右侧主内容 -->
-  <div class="main-content">
-    <section id="profile" class="mb-5">
-      <h2 class="border-bottom pb-2">个人简介</h2>
-      <p class="lead">吉林大学智能制造工程（主修）+ 计算机科学与技术（辅修）本科在读，核心竞争力在于「机械工程」×「计算机视觉」×「多模态大模型」的跨学科实战能力。目前主攻零样本/少样本工业瑕疵检测与图神经网络漏洞检测，拥有多项国赛一等奖与SOTA项目经历。</p>
-      <p>前8学期成绩 86.0，专业排名 9/30，CET-6 480。</p>
-    </section>
-
-    <section id="education" class="mb-5">
-      <h2 class="border-bottom pb-2">教育经历</h2>
-      <div class="timeline position-relative">
-        <div class="mb-4 position-relative ps-5">
-          <div class="position-absolute start-0 translate-middle-x bg-primary rounded-circle" style="width:12px;height:12px;"></div>
-          <strong>2023.09 – 至今</strong>　吉林大学 · 智能制造工程（本科主修）
-          <p class="text-muted ms-4">机械与航空航天工程学院</p>
-        </div>
-        <div class="mb-4 position-relative ps-5">
-          <div class="position-absolute start-0 translate-middle-x bg-primary rounded-circle" style="width:12px;height:12px;"></div>
-          <strong>2023.08 – 至今</strong>　吉林大学 · 计算机科学与技术（本科辅修）
-        </div>
-        <div class="mb-4 position-relative ps-5">
-          <div class="position-absolute start-0 translate-middle-x bg-secondary rounded-circle" style="width:12px;height:12px;"></div>
-          <strong>2022.08 – 2023.06</strong>　吉林大学 · 地质类（大一）
-        </div>
-      </div>
-    </section>
-
-    <section id="projects" class="mb-5">
-      <h2 class="border-bottom pb-2">代表性科研项目</h2>
-      <div class="row g-4">
-        <div class="col-lg-6">
-          <div class="card project-card h-100">
-            <div class="card-body">
-              <h5>智能可迁移的跨项目漏洞检测模型</h5>
-              <p class="text-muted small">图神经网络 · 网络安全 · 迁移学习 · 大创项目（第二负责人）</p>
-              <p>将代码转化为CPG（控制流图+程序依赖图），使用GNN进行特征提取，结合迁移学习实现跨项目间漏洞检测迁移。目前已完成基础模型，正在进行消融实验与工程化。</p>
-              <a href="https://github.com/Dreamlights001/myZSAD" target="_blank" class="btn btn-outline-primary btn-sm">GitHub</a>
+    <!-- Top Navigation (Classic Mode) -->
+    <!-- Hidden by default, toggled via JS -->
+    <nav id="top-nav" class="hidden fixed top-0 left-0 w-full bg-dark/80 backdrop-blur-md z-50 border-b border-white/10 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-mono text-primary font-bold text-xl tracking-tighter">WYC.DEV</a>
+            
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#personal" class="nav-link hover:text-primary transition">Profile</a>
+                <a href="#education" class="nav-link hover:text-primary transition">Education</a>
+                <a href="#skills" class="nav-link hover:text-primary transition">Skills</a>
+                <a href="#research" class="nav-link hover:text-primary transition">Research</a>
+                
+                <!-- Sub-Page Placeholders -->
+                <div class="h-4 w-px bg-gray-700 mx-2"></div>
+                <a href="#" class="text-gray-400 hover:text-white transition">Projects</a>
+                <a href="#" class="text-gray-400 hover:text-white transition">Blog</a>
             </div>
-          </div>
+
+            <button id="sidebar-toggle-btn" class="hidden md:block text-xs border border-gray-700 px-3 py-1 rounded hover:bg-gray-800 transition">
+                Switch to Sidebar
+            </button>
+            
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white p-2 mobile-menu-btn">
+                <i data-lucide="menu"></i>
+            </button>
         </div>
-        <div class="col-lg-6">
-          <div class="card project-card h-100">
-            <div class="card-body">
-              <h5>AA-CLIP：零样本工业瑕疵检测（AnoCLIP+改进）</h5>
-              <p class="text-muted small">Zero-Shot · CLIP · 多模态 · MVTec AD</p>
-              <p>在AnoCLIP基础上提出AA-CLIP（Alignment-Augmented CLIP），通过双分支对齐增强与自适应阈值策略，在MVTec AD数据集上超越当前公开SOTA 3.4%（Image-AUROC）。</p>
-              <a href="https://github.com/Dreamlights001/Bearing-CLIP" target="_blank" class="btn btn-outline-primary btn-sm">GitHub</a>
-              <span class="badge bg-danger ms-2">SOTA</span>
+    </nav>
+
+    <!-- Sidebar Navigation (Modern Mode - Default) -->
+    <aside id="sidebar" class="fixed left-0 top-0 h-full w-72 bg-panel border-r border-white/5 z-40 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-out flex flex-col shadow-2xl shadow-primary/5">
+        <div class="p-8 border-b border-white/5">
+            <h1 class="text-3xl font-bold tracking-wider leading-tight">WANG<br><span class="text-primary glow-text">YUCHEN</span></h1>
+            <p class="text-xs text-gray-500 mt-3 font-mono flex items-center">
+                <span class="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse"></span>
+                AI / CV / ROBOTICS
+            </p>
+        </div>
+        
+        <nav class="flex-1 overflow-y-auto py-6 scrollbar-hide">
+            <ul class="space-y-1 px-4">
+                <li><a href="#personal" class="sidebar-link flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition group">
+                    <i data-lucide="user" class="w-4 h-4 mr-3 text-gray-600 group-hover:text-primary transition"></i> Personal
+                </a></li>
+                <li><a href="#education" class="sidebar-link flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition group">
+                    <i data-lucide="graduation-cap" class="w-4 h-4 mr-3 text-gray-600 group-hover:text-primary transition"></i> Education
+                </a></li>
+                <li><a href="#skills" class="sidebar-link flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition group">
+                    <i data-lucide="cpu" class="w-4 h-4 mr-3 text-gray-600 group-hover:text-primary transition"></i> Skills
+                </a></li>
+                <li><a href="#research" class="sidebar-link flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition group">
+                    <i data-lucide="microscope" class="w-4 h-4 mr-3 text-gray-600 group-hover:text-primary transition"></i> Research
+                </a></li>
+                <li><a href="#awards" class="sidebar-link flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition group">
+                    <i data-lucide="trophy" class="w-4 h-4 mr-3 text-gray-600 group-hover:text-primary transition"></i> Awards
+                </a></li>
+                <li><a href="#competitions" class="sidebar-link flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition group">
+                    <i data-lucide="flag" class="w-4 h-4 mr-3 text-gray-600 group-hover:text-primary transition"></i> Competitions
+                </a></li>
+            </ul>
+            
+            <div class="mt-8 px-8">
+                <p class="text-[10px] text-gray-600 uppercase mb-4 font-bold tracking-widest">Explore</p>
+                <div class="space-y-2">
+                    <a href="#" class="flex items-center text-sm text-gray-400 hover:text-primary transition group">
+                        <i data-lucide="folder-git-2" class="w-4 h-4 mr-3 text-gray-600 group-hover:text-secondary"></i> Projects
+                    </a>
+                    <a href="#" class="flex items-center text-sm text-gray-400 hover:text-primary transition group">
+                        <i data-lucide="book-open" class="w-4 h-4 mr-3 text-gray-600 group-hover:text-secondary"></i> Blog
+                    </a>
+                    <a href="#" class="flex items-center text-sm text-gray-400 hover:text-primary transition group">
+                        <i data-lucide="mail" class="w-4 h-4 mr-3 text-gray-600 group-hover:text-secondary"></i> Contact
+                    </a>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        </nav>
 
-    <section id="awards" class="mb-5">
-      <h2 class="border-bottom pb-2">主要奖项（近年）</h2>
-      <ul class="list-unstyled">
-        <li class="mb-3"><span class="badge bg-warning text-dark me-2">国一</span> 第25届中国大学生数学竞赛吉林省一等奖</li>
-        <li class="mb-3"><span class="badge bg-warning text-dark me-2">国一</span> 2024中国大学生数学建模竞赛吉林省一等奖</li>
-        <li class="mb-3"><span class="badge bg-success text-white me-2">H奖</span> 2025美国大学生数学建模竞赛 Honorable Mention</li>
-        <li class="mb-3"><span class="badge bg-warning text-dark me-2">国一</span> 第九届中国数据新闻大赛 全国一等奖</li>
-        <li class="mb-3"><span class="badge bg-secondary text-white me-2">校二</span> 2024吉林大学大学生物理竞赛 校二等奖</li>
-      </ul>
-    </section>
+        <div class="p-6 border-t border-white/5 bg-black/20">
+            <button id="layout-toggle" class="w-full py-3 border border-gray-800 rounded-lg text-xs text-gray-400 hover:bg-white/5 hover:text-primary hover:border-primary/30 transition flex items-center justify-center gap-2">
+                <i data-lucide="layout-dashboard" class="w-3 h-3"></i>
+                <span>Classic Navigation</span>
+            </button>
+        </div>
+    </aside>
 
-    <section id="skills" class="mb-5">
-      <h2 class="border-bottom pb-2">技能</h2>
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <div class="d-flex justify-content-between"><span>Python / PyTorch</span><strong>95%</strong></div>
-          <div class="skill-bar"><div class="skill-progress" style="width:95%"></div></div>
-        </div>
-        <div class="col-md-6 mb-3">
-          <div class="d-flex justify-content-between"><span>C/C++</span><strong>85%</strong></div>
-          <div class="skill-bar"><div class="skill-progress" style="width:85%"></div></div>
-        </div>
-        <div class="col-md-6 mb-3">
-          <div class="d-flex justify-content-between"><span>CAD/CATIA/SolidWorks</span><strong>90%</strong></div>
-          <div class="skill-bar"><div class="skill-progress" style="width:90%"></div></div>
-        </div>
-        <div class="col-md-6 mb-3">
-          <div class="d-flex justify-content-between"><span>MATLAB / Simulink</span><strong>88%</strong></div>
-          <div class="skill-bar"><div class="skill-progress" style="width:88%"></div></div>
-        </div>
-        <div class="col-md-6 mb-3">
-          <div class="d-flex justify-content-between"><span>多模态大模型（CLIP/SAM/LLaVA）</span><strong>92%</strong></div>
-          <div class="skill-bar"><div class="skill-progress" style="width:92%"></div></div>
-        </div>
-        <div class="col-md-6 mb-3">
-          <div class="d-flex justify-content-between"><span>PLC / LabVIEW</span><strong>80%</strong></div>
-          <div class="skill-bar"><div class="skill-progress" style="width:80%"></div></div>
-        </div>
-      </div>
-    </section>
+    <!-- Mobile Header Overlay (For Sidebar Mode on Mobile) -->
+    <div class="fixed top-0 left-0 w-full p-4 z-50 flex justify-between items-center md:hidden pointer-events-none">
+        <span class="font-mono text-primary font-bold text-lg pointer-events-auto mix-blend-difference">WYC.DEV</span>
+        <button id="mobile-toggle" class="p-2 bg-black/50 backdrop-blur border border-white/10 rounded text-white pointer-events-auto">
+            <i data-lucide="menu"></i>
+        </button>
+    </div>
 
-    <section id="contact" class="mb-5">
-      <h2 class="border-bottom pb-2">联系我</h2>
-      <p>随时欢迎交流～</p>
-      <p>Email: <a href="mailto:16627863893@163.com">16627863893@163.com</a></p>
-      <p>GitHub: <a href="https://github.com/Dreamlights001" target="_blank">Dreamlights001</a></p>
-      <p>微信同手机号，可直接加</p>
-    </section>
-  </div>
+    <!-- Mobile Drawer -->
+    <div id="mobile-drawer" class="fixed inset-0 bg-black/95 z-[60] transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center space-y-8">
+        <button id="mobile-close" class="absolute top-6 right-6 text-gray-400 hover:text-white">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <a href="#personal" class="mobile-link text-2xl font-bold hover:text-primary">Profile</a>
+        <a href="#education" class="mobile-link text-2xl font-bold hover:text-primary">Education</a>
+        <a href="#skills" class="mobile-link text-2xl font-bold hover:text-primary">Skills</a>
+        <a href="#research" class="mobile-link text-2xl font-bold hover:text-primary">Research</a>
+        <div class="w-16 h-px bg-gray-800"></div>
+        <a href="#" class="text-lg text-gray-500 hover:text-white">Projects</a>
+        <a href="#" class="text-lg text-gray-500 hover:text-white">Contact</a>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <main id="main-wrapper" class="md:ml-72 transition-all duration-500 ease-in-out min-h-screen relative">
+        
+        <!-- 3D Hero Section -->
+        <section class="relative h-screen flex flex-col sticky top-0 z-0">
+            <div id="three-container" class="absolute inset-0 cursor-grab active:cursor-grabbing"></div>
+            
+            <!-- Overlay Gradient -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-dark pointer-events-none"></div>
+            
+            <!-- Instructions -->
+            <div class="absolute bottom-12 left-0 w-full text-center pointer-events-none z-10 px-6">
+                <div class="inline-flex items-center gap-3 bg-black/30 backdrop-blur px-4 py-2 rounded-full border border-white/5">
+                    <i data-lucide="mouse-pointer-2" class="w-4 h-4 text-primary animate-bounce"></i>
+                    <span class="text-gray-400 text-[10px] font-mono uppercase tracking-widest">Drag to Explore • Click Face</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Sections (Z-Index ensures they scroll OVER the fixed hero if needed, but here we stack normally) -->
+        <div class="relative z-10 bg-dark border-t border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.8)]">
+            <div class="container mx-auto px-6 py-12 max-w-5xl">
+                
+                <!-- Personal -->
+                <section id="personal" class="section-pad">
+                    <div id="personal-content" class="opacity-0 translate-y-10 transition-all duration-700"></div>
+                </section>
+
+                <!-- Education -->
+                <section id="education" class="section-pad">
+                    <div id="education-content" class="opacity-0 translate-y-10 transition-all duration-700"></div>
+                </section>
+
+                <!-- Skills -->
+                <section id="skills" class="section-pad">
+                    <div id="skills-content" class="opacity-0 translate-y-10 transition-all duration-700"></div>
+                </section>
+
+                <!-- Research -->
+                <section id="research" class="section-pad">
+                    <div id="research-content" class="opacity-0 translate-y-10 transition-all duration-700"></div>
+                </section>
+
+                <!-- Awards -->
+                <section id="awards" class="section-pad">
+                    <div id="awards-content" class="opacity-0 translate-y-10 transition-all duration-700"></div>
+                </section>
+
+                <!-- Competitions -->
+                <section id="competitions" class="section-pad">
+                    <div id="competitions-content" class="opacity-0 translate-y-10 transition-all duration-700"></div>
+                </section>
+
+                <!-- Footer Links -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-24 pt-12 border-t border-white/10">
+                    <a href="#" class="glass-card p-8 rounded-xl text-center hover:bg-white/5 group transition duration-300">
+                        <div class="w-12 h-12 mx-auto bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-secondary/20 transition">
+                            <i data-lucide="folder-git-2" class="text-secondary group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h3 class="font-bold text-white mb-1">Projects</h3>
+                        <p class="text-xs text-gray-500">View code repositories</p>
+                    </a>
+                    <a href="#" class="glass-card p-8 rounded-xl text-center hover:bg-white/5 group transition duration-300">
+                        <div class="w-12 h-12 mx-auto bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition">
+                            <i data-lucide="pen-tool" class="text-primary group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h3 class="font-bold text-white mb-1">Blog</h3>
+                        <p class="text-xs text-gray-500">Read my thoughts</p>
+                    </a>
+                    <a href="mailto:16627863893@163.com" class="glass-card p-8 rounded-xl text-center hover:bg-white/5 group transition duration-300">
+                        <div class="w-12 h-12 mx-auto bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition">
+                            <i data-lucide="mail" class="text-purple-500 group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h3 class="font-bold text-white mb-1">Contact</h3>
+                        <p class="text-xs text-gray-500">Get in touch</p>
+                    </a>
+                </div>
+            </div>
+
+            <footer class="bg-black py-12 text-center border-t border-white/5 mt-12">
+                <p class="text-gray-600 text-sm font-mono">&copy; 2025 Wang Yuchen. Built with Three.js & Tailwind.</p>
+            </footer>
+        </div>
+    </main>
+
+    <!-- Modules -->
+    <script type="module" src="ui.js"></script>
 </body>
 </html>
