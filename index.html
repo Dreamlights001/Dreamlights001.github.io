@@ -12,9 +12,8 @@
             --bg-dark: #0a0a12;
             --text-light: #e0e0e0;
             --glass-bg: rgba(20, 20, 30, 0.85);
-            --border-glow: 0 0 15px rgba(0, 242, 255, 0.3);
             --sidebar-width: 260px;
-            --cube-size: 85vh; /* 立方体大小自适应视口 */
+            --cube-size: 80vh;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,199 +25,103 @@
                 linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(10,10,18,1) 100%);
             color: var(--text-light);
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            overflow: hidden; /* 防止出现滚动条，因为是全屏3D */
+            overflow: hidden; /* 桌面端禁止滚动，全屏3D */
             height: 100vh;
             width: 100vw;
         }
 
-        /* === 侧边导航栏 (默认) === */
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: var(--sidebar-width);
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255,255,255,0.1);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 5px 0 20px rgba(0,0,0,0.5);
+        /* === 通用组件样式 === */
+        h1 { font-size: 2.2rem; margin-bottom: 10px; color: var(--primary-color); }
+        h2 { font-size: 1.6rem; margin-bottom: 20px; border-bottom: 2px solid var(--secondary-color); display: inline-block; padding-bottom: 5px; }
+        h3 { color: #fff; margin-top: 15px; font-size: 1.1rem; }
+        p { line-height: 1.6; color: #ccc; margin-bottom: 15px; font-size: 0.95rem; text-align: justify; }
+        
+        .tag { 
+            display: inline-block; padding: 3px 10px; 
+            background: rgba(112, 0, 255, 0.2); border: 1px solid var(--secondary-color); 
+            border-radius: 15px; font-size: 0.75rem; margin: 0 5px 5px 0; 
         }
 
-        /* 头像区域 */
-        .profile-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .avatar-placeholder {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #333, #555);
-            margin: 0 auto 15px;
-            border: 2px solid var(--primary-color);
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .avatar-placeholder img { width: 100%; height: 100%; object-fit: cover; }
-        .profile-header h2 { font-size: 1.2rem; color: #fff; }
-        .profile-header p { font-size: 0.8rem; color: #aaa; margin-top: 5px; }
-
-        /* 导航链接 */
-        .nav-links {
-            list-style: none;
-            flex-grow: 1;
-        }
-        .nav-links li {
+        .project-card {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-color);
             margin-bottom: 15px;
         }
+
+        /* === 侧边栏 (Sidebar) === */
+        .sidebar {
+            position: fixed; left: 0; top: 0; height: 100%; width: var(--sidebar-width);
+            background: var(--glass-bg); backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255,255,255,0.1); z-index: 1000;
+            display: flex; flex-direction: column; padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        .profile-header { text-align: center; margin-bottom: 30px; }
+        .avatar-placeholder {
+            width: 90px; height: 90px; border-radius: 50%;
+            background: linear-gradient(45deg, #333, #555); margin: 0 auto 15px;
+            border: 2px solid var(--primary-color); display: flex; justify-content: center; align-items: center;
+        }
+        .nav-links { list-style: none; flex-grow: 1; }
         .nav-btn {
-            width: 100%;
-            padding: 12px 15px;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #ccc;
-            text-align: left;
-            cursor: pointer;
-            transition: 0.3s;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            font-size: 0.95rem;
+            width: 100%; padding: 12px; margin-bottom: 10px;
+            background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #ccc;
+            text-align: left; cursor: pointer; transition: 0.3s; border-radius: 6px;
+            display: flex; align-items: center;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            background: rgba(0, 242, 255, 0.1); border-color: var(--primary-color); color: #fff;
         }
         .nav-btn i { margin-right: 10px; width: 20px; text-align: center; }
-        .nav-btn:hover, .nav-btn.active {
-            background: rgba(0, 242, 255, 0.1);
-            border-color: var(--primary-color);
-            color: #fff;
-            text-shadow: 0 0 8px var(--primary-color);
-        }
-
-        /* 底部控制区 */
-        .sidebar-footer {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-        }
-        .controls-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
+        .sidebar-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .controls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px; }
         .icon-btn {
-            background: rgba(255,255,255,0.05);
-            border: none;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 1.2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: rgba(255,255,255,0.05); border: none; color: #fff;
+            padding: 8px; border-radius: 4px; cursor: pointer; transition: 0.3s;
+            display: flex; justify-content: center; align-items: center; text-decoration: none;
         }
-        .icon-btn:hover {
-            background: var(--primary-color);
-            color: #000;
-        }
-        .lang-switch, .layout-switch {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            background: transparent;
-            border: 1px solid #555;
-            color: #aaa;
-            cursor: pointer;
-            font-size: 0.8rem;
-            border-radius: 4px;
-        }
-        .lang-switch:hover, .layout-switch:hover { border-color: #fff; color: #fff; }
+        .icon-btn:hover { background: var(--primary-color); color: #000; }
+        .lang-switch { width: 100%; padding: 8px; background: transparent; border: 1px solid #555; color: #aaa; cursor: pointer; border-radius: 4px; }
 
-        /* === 顶部导航栏 (复古模式) === */
-        body.top-nav-mode .sidebar {
-            transform: translateX(-100%);
+        /* === 顶部栏 (Mobile Only) === */
+        .mobile-header {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+            background: rgba(10, 10, 18, 0.95); border-bottom: 1px solid rgba(255,255,255,0.1);
+            z-index: 2000; padding: 0 20px; align-items: center; justify-content: space-between;
         }
-        .top-nav {
-            position: fixed;
-            top: -60px;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background: var(--glass-bg);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 30px;
-            z-index: 1000;
-            transition: top 0.4s;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        body.top-nav-mode .top-nav { top: 0; }
-        .top-menu { display: flex; gap: 20px; }
-        .top-menu button {
-            background: none; border: none; color: #ccc; cursor: pointer; font-size: 1rem;
-        }
-        .top-menu button:hover { color: var(--primary-color); }
-        .top-controls { display: flex; gap: 15px; }
+        .mobile-toggle { background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
 
-        /* === 3D 场景核心 === */
+        /* === 3D 场景容器 (Desktop) === */
         .scene {
-            position: absolute;
-            top: 0;
-            left: var(--sidebar-width); /* 默认留出侧边栏宽度 */
-            width: calc(100% - var(--sidebar-width));
-            height: 100%;
-            perspective: 2000px; /* 增强透视感 */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: left 0.4s, width 0.4s;
+            position: absolute; top: 0; left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width)); height: 100%;
+            perspective: 2000px; display: flex; justify-content: center; align-items: center;
             overflow: hidden;
-        }
-        body.top-nav-mode .scene {
-            left: 0;
-            width: 100%;
         }
 
         .cube {
-            width: var(--cube-size);
-            height: var(--cube-size);
-            max-width: 800px;
-            max-height: 800px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 弹性动画 */
+            width: var(--cube-size); height: var(--cube-size);
+            max-width: 800px; max-height: 800px;
+            position: relative; transform-style: preserve-3d;
+            transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        /* 每一个面 */
         .face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            position: absolute; width: 100%; height: 100%;
             background: rgba(15, 15, 25, 0.95);
-            border: 1px solid rgba(0, 242, 255, 0.2);
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            backface-visibility: hidden; /* 关键：隐藏背面 */
-            overflow-y: auto; /* 内容过多时面内滚动 */
-            border-radius: 10px;
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            box-shadow: inset 0 0 60px rgba(0,0,0,0.9);
+            padding: 40px; display: flex; flex-direction: column;
+            backface-visibility: hidden; overflow-y: auto; border-radius: 8px;
         }
-        
-        /* 自定义滚动条 */
-        .face::-webkit-scrollbar { width: 8px; }
-        .face::-webkit-scrollbar-track { background: #000; }
-        .face::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
 
-        /* 面位置定义 (立方体) */
+        /* 滚动条样式 */
+        .face::-webkit-scrollbar { width: 6px; }
+        .face::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+
+        /* 3D 面位置 */
         .face-front  { transform: rotateY(0deg) translateZ(calc(var(--cube-size)/2)); }
         .face-right  { transform: rotateY(90deg) translateZ(calc(var(--cube-size)/2)); }
         .face-back   { transform: rotateY(180deg) translateZ(calc(var(--cube-size)/2)); }
@@ -226,278 +129,218 @@
         .face-top    { transform: rotateX(90deg) translateZ(calc(var(--cube-size)/2)); }
         .face-bottom { transform: rotateX(-90deg) translateZ(calc(var(--cube-size)/2)); }
 
-        /* 响应式调整：小屏幕时Z轴距离需调整，否则面会穿插 */
-        @media (max-width: 768px) {
-            :root { --sidebar-width: 0px; --cube-size: 90vw; }
-            .sidebar { transform: translateX(-100%); }
-            .sidebar.mobile-open { transform: translateX(0); }
-            .scene { left: 0; width: 100%; }
-            .face-front  { transform: rotateY(0deg) translateZ(45vw); }
-            .face-right  { transform: rotateY(90deg) translateZ(45vw); }
-            .face-back   { transform: rotateY(180deg) translateZ(45vw); }
-            .face-left   { transform: rotateY(-90deg) translateZ(45vw); }
-            .face-top    { transform: rotateX(90deg) translateZ(45vw); }
-            .face-bottom { transform: rotateX(-90deg) translateZ(45vw); }
-            
-            .mobile-menu-btn {
-                display: block;
-                position: fixed;
-                top: 20px;
-                left: 20px;
-                z-index: 2000;
-                background: rgba(0,0,0,0.8);
-                border: 1px solid var(--primary-color);
-                color: #fff;
-                padding: 10px;
-                border-radius: 5px;
-            }
-        }
-        @media (min-width: 769px) {
-            .mobile-menu-btn { display: none; }
-            .face-front  { transform: rotateY(0deg) translateZ(400px); }
-            .face-right  { transform: rotateY(90deg) translateZ(400px); }
-            .face-back   { transform: rotateY(180deg) translateZ(400px); }
-            .face-left   { transform: rotateY(-90deg) translateZ(400px); }
-            .face-top    { transform: rotateX(90deg) translateZ(400px); }
-            .face-bottom { transform: rotateX(-90deg) translateZ(400px); }
-        }
-
-        /* === 内容排版 === */
-        h1 { font-size: 2.5rem; margin-bottom: 10px; color: var(--primary-color); }
-        h2 { font-size: 1.8rem; margin-bottom: 20px; border-bottom: 2px solid var(--secondary-color); display: inline-block; padding-bottom: 5px; }
-        h3 { color: #fff; margin-top: 15px; }
-        p { line-height: 1.6; color: #ccc; margin-bottom: 15px; text-align: justify; }
-        
-        .tag { 
-            display: inline-block; padding: 4px 10px; 
-            background: rgba(112, 0, 255, 0.2); border: 1px solid var(--secondary-color); 
-            border-radius: 15px; font-size: 0.8rem; margin: 0 5px 5px 0; 
-        }
-
-        /* 项目卡片样式 */
-        .project-card {
-            background: rgba(255,255,255,0.03);
-            padding: 15px;
-            border-left: 3px solid var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        /* 底部联系方式大字 */
-        .contact-big {
-            text-align: center;
-            margin-top: auto;
-            padding: 20px;
-        }
-        .contact-row { margin-bottom: 10px; font-size: 1.1rem; }
-        .contact-row i { color: var(--primary-color); margin-right: 10px; }
-
-        /* === 3D 指引箭头 === */
+        /* === 交互指引箭头 (带文字) === */
         .arrow-guide {
-            position: absolute;
-            color: rgba(255,255,255,0.2);
-            font-size: 2rem;
-            pointer-events: none;
-            animation: pulse 2s infinite;
+            position: absolute; display: flex; align-items: center; gap: 10px;
+            color: rgba(255,255,255,0.4); font-size: 1rem; pointer-events: none;
+            transition: 0.3s; z-index: 100; text-shadow: 0 0 5px #000;
         }
-        .arrow-top { top: 20px; left: 50%; transform: translateX(-50%); }
-        .arrow-bottom { bottom: 20px; left: 50%; transform: translateX(-50%); }
-        .arrow-left { left: 20px; top: 50%; transform: translateY(-50%); }
-        .arrow-right { right: 20px; top: 50%; transform: translateY(-50%); }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 0.8; transform: scale(1.2) translateX(-50%); }
-        }
+        .arrow-guide span { font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; font-weight: bold; }
+        
+        .arrow-top    { top: 30px; left: 50%; transform: translateX(-50%); flex-direction: column; }
+        .arrow-bottom { bottom: 30px; left: 50%; transform: translateX(-50%); flex-direction: column-reverse; }
+        .arrow-left   { left: 30px; top: 50%; transform: translateY(-50%); flex-direction: row; }
+        .arrow-right  { right: 30px; top: 50%; transform: translateY(-50%); flex-direction: row-reverse; }
 
         /* 旋转提示 */
         .rotate-hint {
-            position: absolute;
-            bottom: 30px;
-            right: 30px;
-            color: rgba(255,255,255,0.4);
-            font-size: 0.8rem;
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .rotate-icon {
-            width: 30px; height: 30px; border: 2px dashed rgba(255,255,255,0.4);
-            border-radius: 50%;
+            position: absolute; bottom: 20px; right: 20px; color: rgba(255,255,255,0.3);
+            font-size: 0.8rem; display: flex; align-items: center; gap: 8px;
         }
 
+        /* === 移动端适配 (传统的流式布局) === */
+        @media (max-width: 768px) {
+            body { 
+                overflow-y: auto; /* 允许页面滚动 */
+                height: auto; 
+                background-attachment: fixed; /* 背景固定 */
+            }
+
+            /* 侧边栏变为抽屉 */
+            .sidebar {
+                transform: translateX(-100%);
+                width: 80%; max-width: 300px;
+                box-shadow: 10px 0 30px rgba(0,0,0,0.8);
+            }
+            .sidebar.active { transform: translateX(0); }
+
+            /* 显示顶部栏 */
+            .mobile-header { display: flex; }
+
+            /* 破坏 3D 场景，改为流式 */
+            .scene {
+                position: relative; left: 0; top: 60px; /* 避开顶部栏 */
+                width: 100%; height: auto;
+                display: block; perspective: none; 
+                padding: 20px; padding-bottom: 80px;
+            }
+
+            .cube {
+                width: 100%; height: auto;
+                transform: none !important; /* 强制移除旋转 */
+                max-width: none; max-height: none;
+            }
+
+            .face {
+                position: relative; /* 从绝对定位改为相对 */
+                width: 100%; height: auto;
+                transform: none !important; /* 移除3D位移 */
+                margin-bottom: 30px; /* 增加卡片间距 */
+                opacity: 1 !important; visibility: visible !important;
+                border: 1px solid rgba(255,255,255,0.1);
+                background: rgba(20, 20, 30, 0.6);
+            }
+
+            /* 隐藏 3D 专属控件 */
+            .arrow-guide, .rotate-hint, .layout-switch { display: none; }
+            
+            h1 { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
 
-    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <nav class="top-nav">
-        <div style="font-weight:bold; font-size:1.2rem;">YC.Wang</div>
-        <div class="top-menu">
-            <button onclick="rotateTo('front')">主页</button>
-            <button onclick="rotateTo('right')">教育</button>
-            <button onclick="rotateTo('back')">项目</button>
-            <button onclick="rotateTo('left')">技能</button>
-            <button onclick="rotateTo('top')">荣誉</button>
-            <button onclick="rotateTo('bottom')">联系</button>
-        </div>
-        <div class="top-controls">
-            <button onclick="toggleLayout()" title="Switch Layout"><i class="fas fa-columns"></i></button>
-            <button onclick="toggleLang()" title="Switch Language"><i class="fas fa-language"></i></button>
-        </div>
-    </nav>
+    <header class="mobile-header">
+        <div style="font-weight:bold; color:var(--primary-color);">YC.Wang</div>
+        <button class="mobile-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    </header>
 
     <aside class="sidebar" id="sidebar">
         <div class="profile-header">
             <div class="avatar-placeholder">
-                <i class="fas fa-user-astronaut" style="font-size: 3rem; color: #ccc;"></i>
+                <i class="fas fa-user-astronaut" style="font-size: 2.5rem; color: #ccc;"></i>
             </div>
-            <h2 data-zh="王宇琛" data-en="Yuchen Wang">王宇琛</h2>
-            <p data-zh="吉林大学 | 智能制造 & CS" data-en="Jilin Univ | Intelligent Mfg & CS">吉林大学 | 智能制造 & CS</p>
+            <h2 data-zh="王宇琛" data-en="Yuchen Wang" style="font-size:1.2rem; border:none; margin:0;">王宇琛</h2>
+            <p style="font-size:0.8rem; color:#888; text-align:center;">Smart Mfg & CS Student</p>
         </div>
 
         <ul class="nav-links">
-            <li><button class="nav-btn active" onclick="rotateTo('front')"><i class="fas fa-home"></i> <span data-zh="个人主页" data-en="Home">个人主页</span></button></li>
-            <li><button class="nav-btn" onclick="rotateTo('right')"><i class="fas fa-graduation-cap"></i> <span data-zh="教育背景" data-en="Education">教育背景</span></button></li>
-            <li><button class="nav-btn" onclick="rotateTo('back')"><i class="fas fa-project-diagram"></i> <span data-zh="科研项目" data-en="Projects">科研项目</span></button></li>
-            <li><button class="nav-btn" onclick="rotateTo('left')"><i class="fas fa-code"></i> <span data-zh="专业技能" data-en="Skills">专业技能</span></button></li>
-            <li><button class="nav-btn" onclick="rotateTo('top')"><i class="fas fa-trophy"></i> <span data-zh="荣誉奖项" data-en="Awards">荣誉奖项</span></button></li>
-            <li><button class="nav-btn" onclick="rotateTo('bottom')"><i class="fas fa-address-card"></i> <span data-zh="联系方式" data-en="Contact">联系方式</span></button></li>
+            <li><button class="nav-btn active" onclick="navigateTo('front')"><i class="fas fa-home"></i> <span data-zh="主页" data-en="Home">主页</span></button></li>
+            <li><button class="nav-btn" onclick="navigateTo('right')"><i class="fas fa-graduation-cap"></i> <span data-zh="教育" data-en="Education">教育</span></button></li>
+            <li><button class="nav-btn" onclick="navigateTo('back')"><i class="fas fa-project-diagram"></i> <span data-zh="项目" data-en="Projects">项目</span></button></li>
+            <li><button class="nav-btn" onclick="navigateTo('left')"><i class="fas fa-code"></i> <span data-zh="技能" data-en="Skills">技能</span></button></li>
+            <li><button class="nav-btn" onclick="navigateTo('top')"><i class="fas fa-trophy"></i> <span data-zh="荣誉" data-en="Awards">荣誉</span></button></li>
+            <li><button class="nav-btn" onclick="navigateTo('bottom')"><i class="fas fa-address-card"></i> <span data-zh="联系" data-en="Contact">联系</span></button></li>
         </ul>
 
         <div class="sidebar-footer">
             <div class="controls-grid">
-                <a href="tencent://message/?uin=3407844687" class="icon-btn" title="QQ: 3407844687"><i class="fab fa-qq"></i></a>
-                <button class="icon-btn" title="WeChat: DreamLights001" onclick="alert('WeChat ID: DreamLights001')"><i class="fab fa-weixin"></i></button>
-                <a href="https://github.com/Dreamlights001" target="_blank" class="icon-btn" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="mailto:3407844687@qq.com" class="icon-btn" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="tencent://message/?uin=3407844687" class="icon-btn" title="QQ"><i class="fab fa-qq"></i></a>
+                <button class="icon-btn" onclick="alert('WeChat: DreamLights001')" title="WeChat"><i class="fab fa-weixin"></i></button>
+                <a href="https://github.com/Dreamlights001" target="_blank" class="icon-btn"><i class="fab fa-github"></i></a>
+                <a href="mailto:3407844687@qq.com" class="icon-btn"><i class="fas fa-envelope"></i></a>
             </div>
             <button class="lang-switch" onclick="toggleLang()">CN / EN</button>
-            <button class="layout-switch" onclick="toggleLayout()">
-                <i class="fas fa-exchange-alt"></i> <span data-zh="切换导航栏样式" data-en="Toggle Nav Style">切换导航栏样式</span>
-            </button>
         </div>
     </aside>
 
     <main class="scene" id="scene">
-        <div class="arrow-guide arrow-top"><i class="fas fa-chevron-up"></i></div>
-        <div class="arrow-guide arrow-bottom"><i class="fas fa-chevron-down"></i></div>
-        <div class="arrow-guide arrow-left"><i class="fas fa-chevron-left"></i></div>
-        <div class="arrow-guide arrow-right"><i class="fas fa-chevron-right"></i></div>
+        
+        <div class="arrow-guide arrow-top">
+            <i class="fas fa-chevron-up"></i> <span id="label-top">荣誉</span>
+        </div>
+        <div class="arrow-guide arrow-bottom">
+            <span id="label-bottom">联系</span> <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="arrow-guide arrow-left">
+            <i class="fas fa-chevron-left"></i> <span id="label-left">技能</span>
+        </div>
+        <div class="arrow-guide arrow-right">
+            <span id="label-right">教育</span> <i class="fas fa-chevron-right"></i>
+        </div>
 
         <div class="cube" id="cube">
             
-            <div class="face face-front">
+            <div class="face face-front" id="section-front">
                 <h1 data-zh="你好，我是王宇琛" data-en="Hi, I'm Yuchen Wang">你好，我是王宇琛</h1>
-                <h3 data-zh="跨学科开发者 / 智能制造 / AI 爱好者" data-en="Interdisciplinary Dev / Intelligent Mfg / AI Enthusiast">跨学科开发者 / 智能制造 / AI 爱好者</h3>
-                <div style="margin: 20px 0; border-top: 1px solid #333; padding-top: 20px;">
-                    <p data-zh="积极、自信、大胆，具备良好的理工科思维。目前就读于吉林大学，主修智能制造工程，辅修计算机科学与技术。"
-                       data-en="Positive, confident, and bold with strong logical thinking. Currently studying at Jilin University, majoring in Intelligent Manufacturing Engineering with a minor in Computer Science.">
-                        积极、自信、大胆，具备良好的理工科思维。目前就读于吉林大学，主修智能制造工程，辅修计算机科学与技术。
+                <h3 data-zh="智能制造 & 计算机科学 | 吉林大学" data-en="Intelligent Mfg & CS | Jilin University">智能制造 & 计算机科学 | 吉林大学</h3>
+                <div style="margin: 20px 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                    <p data-zh="积极、自信、大胆。我对数学、计算机科学及智能领域充满热情 [cite: 20]。" 
+                       data-en="Positive, confident, and bold. Passionate about Math, CS, and Intelligence fields.">
+                        积极、自信、大胆。我对数学、计算机科学及智能领域充满热情。
                     </p>
-                    <p data-zh="对数学、计算机视觉及多模态大模型感兴趣。具备跨学科应用能力，熟悉机械设计与深度学习算法。"
-                       data-en="Interested in Mathematics, Computer Vision, and Multimodal LLMs. possess interdisciplinary application skills, familiar with mechanical design and deep learning algorithms.">
-                        对数学、计算机视觉及多模态大模型感兴趣。具备跨学科应用能力，熟悉机械设计与深度学习算法。
+                    <p data-zh="目前就读于吉林大学机械与航空航天工程学院（主修）及计算机学院（辅修）[cite: 14, 16]，致力于将机器视觉与多模态大模型应用于工业场景 [cite: 25]。"
+                       data-en="Studying at Jilin University (Major in Mech & Aerospace, Minor in CS). Dedicated to applying Computer Vision and Multimodal LLMs in industry.">
+                        目前就读于吉林大学机械与航空航天工程学院（主修）及计算机学院（辅修），致力于将机器视觉与多模态大模型应用于工业场景。
                     </p>
-                </div>
-                <div style="margin-top: auto;">
-                    <button onclick="rotateTo('back')" style="padding:10px 20px; background:var(--primary-color); border:none; cursor:pointer; font-weight:bold;">
-                        <span data-zh="查看我的项目" data-en="View Projects">查看我的项目</span> <i class="fas fa-arrow-right"></i>
-                    </button>
                 </div>
             </div>
 
-            <div class="face face-right">
+            <div class="face face-right" id="section-right">
                 <h2 data-zh="教育履历" data-en="Education">教育履历</h2>
-                
                 <div class="project-card">
-                    <h3 data-zh="吉林大学 (本科)" data-en="Jilin University (Undergraduate)">吉林大学 (本科)</h3>
-                    <div style="color: var(--primary-color); font-size:0.9rem;">2023.08 - 至今 (2026毕业)</div>
-                    <p data-zh="主修：机械与航空航天工程学院 | 智能制造工程" data-en="Major: Intelligent Manufacturing Engineering">
-                        主修：机械与航空航天工程学院 | 智能制造工程
-                    </p>
-                    <p data-zh="辅修：计算机科学与技术学院 | 计算机科学与技术" data-en="Minor: Computer Science and Technology">
-                        辅修：计算机科学与技术学院 | 计算机科学与技术
-                    </p>
-                    <div class="tag">GPA: 86.0</div> <div class="tag">Rank: 9/30</div> <div class="tag">CET-6: 480</div>
+                    <h3 data-zh="吉林大学 (本科)" data-en="Jilin University">吉林大学 (本科)</h3>
+                    <p style="color: var(--primary-color); margin-bottom:5px;">2023.08 - 2026.09 [cite: 12]</p>
+                    <p><b>Major:</b> 智能制造工程 [cite: 14] <br> <b>Minor:</b> 计算机科学与技术 [cite: 16]</p>
+                    <div>
+                        <span class="tag">GPA: 86.0 [cite: 5]</span>
+                        <span class="tag">Rank: 9/30 [cite: 6]</span>
+                        <span class="tag">CET-6: 480 [cite: 10]</span>
+                    </div>
                 </div>
-
                 <div class="project-card">
-                    <h3 data-zh="吉林大学 (转专业前)" data-en="Jilin University (Previous)">吉林大学 (转专业前)</h3>
-                    <div style="color: #aaa; font-size:0.9rem;">2022.08 - 2023.06</div>
-                    <p data-zh="地球科学学院 | 地质类" data-en="College of Earth Sciences | Geology Class">地球科学学院 | 地质类</p>
+                    <h3 data-zh="地质类 (转专业前)" data-en="Geology Class (Previous)">地质类 (转专业前)</h3>
+                    <p style="font-size:0.85rem;">2022.08 - 2023.06 | 地球科学学院 [cite: 17]</p>
                 </div>
             </div>
 
-            <div class="face face-back">
-                <h2 data-zh="科研与项目" data-en="Projects & Research">科研与项目</h2>
-
+            <div class="face face-back" id="section-back">
+                <h2 data-zh="科研项目" data-en="Projects">科研项目</h2>
                 <div class="project-card">
-                    <h3 data-zh="智能可迁移的跨项目漏洞检测模型" data-en="Cross-Project Vulnerability Detection Model">智能可迁移的跨项目漏洞检测模型</h3>
-                    <div class="tag">GNN</div> <div class="tag">Network Security</div> <div class="tag">Graph Learning</div>
-                    <p data-zh="大创项目。负责深度数学模型构建与程序优化。将代码结构化为代码属性图(CPG)，利用图神经网络(GNN)结合迁移学习技术，提升模型跨领域自适应能力。"
-                       data-en="Responsible for mathematical model construction. Structured code into Code Property Graphs (CPG) and used GNN with transfer learning to enhance cross-domain adaptability.">
-                       构建代码属性图(CPG)，利用图神经网络(GNN)结合迁移学习技术进行漏洞检测。
+                    <h3 style="font-size:1rem;" data-zh="智能可迁移的跨项目漏洞检测模型" data-en="Cross-Project Vulnerability Detection">智能可迁移的跨项目漏洞检测模型 [cite: 27]</h3>
+                    <div style="margin:5px 0;"><span class="tag">GNN</span> <span class="tag">Network Security</span></div>
+                    <p data-zh="负责数学模型构建与程序优化。将代码转化为控制流图(CFG)与程序依赖图(PDG)构成的代码属性图(CPG)，利用图神经网络(GNN)进行漏洞检测 [cite: 29]。"
+                       data-en="Responsible for math modeling. Converted code to CPG using CFG/PDG and applied GNN for vulnerability detection.">
+                       负责数学模型构建。利用图神经网络(GNN)处理代码属性图(CPG)以检测漏洞。
                     </p>
                 </div>
-
                 <div class="project-card">
-                    <h3 data-zh="基于零样本的工业瑕疵检测" data-en="Zero-Shot Industrial Defect Detection">基于零样本的工业瑕疵检测</h3>
-                    <div class="tag">Computer Vision</div> <div class="tag">Multimodal</div> <div class="tag">Zero-Shot</div>
-                    <p data-zh="结合Zero-Shot Learning与多模态数据融合。融合视觉与文本模型，在工业数据集与特定类别训练数据的通用瑕疵检测模型中表现出色。"
-                       data-en="Combined Zero-Shot Learning with multimodal data fusion. Fused vision and text models for defect detection in industrial datasets.">
-                       结合Zero-Shot Learning与多模态数据融合，融合视觉与文本模型实现通用瑕疵检测。
+                    <h3 style="font-size:1rem;" data-zh="基于零样本的工业瑕疵检测" data-en="Zero-Shot Industrial Defect Detection">基于零样本的工业瑕疵检测 [cite: 33]</h3>
+                    <div style="margin:5px 0;"><span class="tag">CV</span> <span class="tag">Zero-Shot</span></div>
+                    <p data-zh="结合Zero-Shot Learning与多模态数据融合。在工业数据集上构建了通用瑕疵检测模型 [cite: 35]。"
+                       data-en="Combined Zero-Shot Learning with multimodal data. Built a generic defect detection model on industrial datasets.">
+                       结合Zero-Shot Learning与多模态数据融合，构建通用工业瑕疵检测模型。
                     </p>
-                    <a href="https://github.com/Dreamlights001/myZSAD" target="_blank" style="color:var(--primary-color);"><i class="fab fa-github"></i> Code (myZSAD)</a>
                 </div>
             </div>
 
-            <div class="face face-left">
+            <div class="face face-left" id="section-left">
                 <h2 data-zh="专业技能" data-en="Skills">专业技能</h2>
                 
-                <h3><i class="fas fa-code"></i> Programming & AI</h3>
-                <p>Python, C/C++, MATLAB, PLC, Assembly</p>
-                <p>PyTorch, TensorFlow, Transformer, CLIP, SAM, LLM APIs</p>
+                <h3 style="color:var(--primary-color)"><i class="fas fa-code"></i> 开发与AI</h3>
+                <p>Python, C/C++, MATLAB, PLC, Assembly [cite: 62]<br>
+                PyTorch, TensorFlow, Transformer, CLIP, SAM [cite: 25]</p>
                 
-                <h3><i class="fas fa-drafting-compass"></i> Engineering & Tools</h3>
-                <p>CAD, CATIA, SolidWorks (3D Modeling)</p>
-                <p>LabVIEW, MATLAB-Simulation, Comsol, Mujoco</p>
-                
-                <h3><i class="fas fa-laptop-code"></i> Others</h3>
-                <p>Data Structure, Linux, Git, Office Suite</p>
+                <h3 style="color:var(--primary-color)"><i class="fas fa-cogs"></i> 工程软件</h3>
+                <p>CAD, CATIA, SolidWorks (熟练) [cite: 59]<br>
+                LabVIEW, MATLAB-Simulation, Comsol, Mujoco [cite: 61]</p>
             </div>
 
-            <div class="face face-top">
-                <h2 data-zh="奖项与荣誉" data-en="Awards & Honors">奖项与荣誉</h2>
-                <ul style="list-style: none; padding-left: 10px;">
-                    <li style="margin-bottom: 10px;"><i class="fas fa-medal" style="color:gold;"></i> <b>2025 MCM/ICM</b> - H Prize (Honorable Mention)</li>
-                    <li style="margin-bottom: 10px;"><i class="fas fa-medal" style="color:gold;"></i> <b>2024 CUMCM</b> - Jilin Province 1st Prize</li>
-                    <li style="margin-bottom: 10px;"><i class="fas fa-medal" style="color:silver;"></i> <b>25th Math Competition</b> - Jilin Province 1st Prize</li>
-                    <li style="margin-bottom: 10px;"><i class="fas fa-medal" style="color:brown;"></i> <b>9th China Data Journalism</b> - National 1st Prize</li>
-                    <li style="margin-bottom: 10px;"><i class="fas fa-medal"></i> <b>2024 Physics Competition</b> - School 2nd Prize</li>
+            <div class="face face-top" id="section-top">
+                <h2 data-zh="荣誉奖项" data-en="Honors">荣誉奖项</h2>
+                <ul style="list-style:none; padding:0; font-size:0.9rem; color:#ccc;">
+                    <li style="margin-bottom:8px;"><i class="fas fa-award" style="color:gold;"></i> 2025 MCM/ICM H Prize [cite: 46]</li>
+                    <li style="margin-bottom:8px;"><i class="fas fa-award" style="color:gold;"></i> 2024 CUMCM 吉林省一等奖 [cite: 45]</li>
+                    <li style="margin-bottom:8px;"><i class="fas fa-award" style="color:silver;"></i> 第25届大学生数学竞赛 吉林省一等奖 [cite: 44]</li>
+                    <li style="margin-bottom:8px;"><i class="fas fa-award" style="color:#cd7f32;"></i> 第九届中国数据新闻大赛 全国一等奖 [cite: 48]</li>
                 </ul>
-                
-                <h3 data-zh="竞赛职责" data-en="Competition Roles">竞赛职责</h3>
-                <p data-zh="常担任队长及建模手。负责模型构建、代码实现、API部署及可视化工作。" data-en="Often served as Team Leader and Modeler. Responsible for model building, coding, API deployment, and visualization.">
-                    常担任队长及建模手。负责模型构建、代码实现、API部署及可视化工作。
+                <h3 data-zh="竞赛角色" data-en="Role">竞赛角色</h3>
+                <p data-zh="常担任队长及建模手，负责模型构建与可视化 [cite: 54]。" data-en="Team Leader & Modeler. Model building and visualization.">
+                    常担任队长及建模手，负责模型构建与可视化。
                 </p>
             </div>
 
-            <div class="face face-bottom">
-                <h2 data-zh="联系我" data-en="Contact Me">联系我</h2>
-                <div class="contact-big">
-                    <div class="contact-row"><i class="fab fa-qq"></i> 3407844687</div>
-                    <div class="contact-row"><i class="fab fa-weixin"></i> DreamLights001</div>
-                    <div class="contact-row"><i class="fas fa-envelope"></i> 3407844687@qq.com</div>
-                    <div class="contact-row"><i class="fas fa-map-marker-alt"></i> Changchun, Jilin, China</div>
-                    
-                    <div style="margin-top: 30px;">
-                         <a href="https://github.com/Dreamlights001" target="_blank" style="display:inline-block; padding:10px 20px; border:1px solid #fff; color:#fff; text-decoration:none; border-radius:5px;">
-                            <i class="fab fa-github"></i> Visit GitHub Profile
+            <div class="face face-bottom" id="section-bottom">
+                <h2 data-zh="联系我" data-en="Contact">联系我</h2>
+                <div style="text-align:center; margin-top:20px;">
+                    <div style="font-size:1.1rem; margin-bottom:10px;"><i class="fab fa-qq" style="color:var(--primary-color)"></i> 3407844687 [cite: 66]</div>
+                    <div style="font-size:1.1rem; margin-bottom:10px;"><i class="fab fa-weixin" style="color:var(--secondary-color)"></i> DreamLights001 [cite: 66]</div>
+                    <div style="font-size:1.1rem; margin-bottom:10px;"><i class="fas fa-envelope"></i> 3407844687@qq.com [cite: 66]</div>
+                    <div style="margin-top:30px;">
+                         <a href="https://github.com/Dreamlights001" target="_blank" style="padding:10px 20px; border:1px solid #fff; color:#fff; text-decoration:none; border-radius:5px;">
+                            <i class="fab fa-github"></i> GitHub Profile
                          </a>
+                         <div style="margin-top:10px; font-size:0.8rem; color:#666;">[cite: 64]</div>
                     </div>
                 </div>
             </div>
@@ -505,41 +348,33 @@
         </div>
         
         <div class="rotate-hint">
-            <div class="rotate-icon"></div> <span data-zh="拖拽旋转" data-en="Drag to Rotate">拖拽旋转 / Drag to Rotate</span>
+            <i class="fas fa-mouse"></i> <span data-zh="拖拽旋转 / 滚动" data-en="Drag / Scroll">拖拽旋转</span>
         </div>
     </main>
 
     <script>
-        /* === 状态变量 === */
+        // 状态与配置
         let currentLang = 'zh';
+        let currentFace = 'front';
         let isDragging = false;
         let startX, startY;
-        let currentRotateX = 0;
-        let currentRotateY = 0;
+        let rotX = 0, rotY = 0;
         const cube = document.getElementById('cube');
-        
-        /* === 语言包 === */
-        // 简单的文字替换逻辑，基于 data-zh 和 data-en 属性
-        function toggleLang() {
-            currentLang = currentLang === 'zh' ? 'en' : 'zh';
-            const elements = document.querySelectorAll('[data-zh]');
-            elements.forEach(el => {
-                el.innerText = el.getAttribute(`data-${currentLang}`);
-            });
-        }
+        const sidebar = document.getElementById('sidebar');
 
-        /* === 布局切换 === */
-        function toggleLayout() {
-            document.body.classList.toggle('top-nav-mode');
-        }
+        // 邻接关系图（用于更新导航箭头文字）
+        // 格式: 当前面: { top: [面ID, 显示名], bottom: ..., left: ..., right: ... }
+        const navMap = {
+            'front': { top: ['top', '荣誉'], bottom: ['bottom', '联系'], left: ['left', '技能'], right: ['right', '教育'] },
+            'right': { top: ['top', '荣誉'], bottom: ['bottom', '联系'], left: ['front', '主页'], right: ['back', '项目'] }, // 简化逻辑：右侧的左边是主页
+            'back':  { top: ['top', '荣誉'], bottom: ['bottom', '联系'], left: ['right', '教育'], right: ['left', '技能'] },
+            'left':  { top: ['top', '荣誉'], bottom: ['bottom', '联系'], left: ['back', '项目'], right: ['front', '主页'] },
+            'top':   { top: ['back', '项目'], bottom: ['front', '主页'], left: ['left', '技能'], right: ['right', '教育'] }, // 俯视图逻辑略复杂，这里做简化映射
+            'bottom':{ top: ['front', '主页'], bottom: ['back', '项目'], left: ['left', '技能'], right: ['right', '教育'] }
+        };
 
-        function toggleMobileMenu() {
-            document.getElementById('sidebar').classList.toggle('mobile-open');
-        }
-
-        /* === 核心 3D 旋转逻辑 === */
-        // 预设的面角度
-        const faces = {
+        // 3D 旋转角度定义
+        const faceAngles = {
             'front':  { x: 0, y: 0 },
             'right':  { x: 0, y: -90 },
             'back':   { x: 0, y: -180 },
@@ -548,105 +383,111 @@
             'bottom': { x: 90, y: 0 }
         };
 
-        function rotateTo(face) {
-            const target = faces[face];
-            currentRotateX = target.x;
-            currentRotateY = target.y;
-            updateCube();
-            
-            // 更新导航栏高亮
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            // 简单匹配，实际项目中可用ID匹配
-            // 这里为了演示简化处理
+        // 初始化
+        updateGuideLabels('front');
+
+        // === 核心导航函数 ===
+        function navigateTo(faceId) {
+            // 1. 判断是移动端还是桌面端
+            if (window.innerWidth <= 768) {
+                // 移动端：滚动到对应ID
+                const el = document.getElementById('section-' + faceId);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    toggleSidebar(); // 关菜单
+                }
+            } else {
+                // 桌面端：3D 旋转
+                const target = faceAngles[faceId];
+                if (target) {
+                    rotX = target.x;
+                    rotY = target.y;
+                    cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+                    currentFace = faceId;
+                    updateGuideLabels(faceId);
+                    
+                    // 高亮菜单
+                    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                    // 这里简单逻辑，实际需根据faceId匹配
+                }
+            }
         }
 
-        function updateCube() {
-            cube.style.transform = `rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg)`;
+        // === 更新箭头文字 ===
+        function updateGuideLabels(current) {
+            const map = navMap[current];
+            if (!map) return; // 顶部/底部视角可能导致逻辑复杂，暂用默认或简化
+
+            // 辅助函数：设置文本和点击事件
+            const setLabel = (dir, info) => {
+                const el = document.getElementById(`label-${dir}`);
+                if(el) el.innerText = currentLang === 'zh' ? info[1] : translateEn(info[1]);
+                
+                // 让箭头也能点击导航
+                const arrow = document.querySelector(`.arrow-${dir}`);
+                arrow.onclick = () => navigateTo(info[0]);
+            };
+
+            setLabel('top', map.top);
+            setLabel('bottom', map.bottom);
+            setLabel('left', map.left);
+            setLabel('right', map.right);
         }
 
-        /* === 鼠标拖拽交互逻辑 === */
-        // 实现简单的“滑动切换”逻辑，而不是自由旋转，以保证文字始终正向可读
-        // 当用户拖拽超过一定阈值，自动翻转到相邻面
+        // 简单的中英映射
+        function translateEn(text) {
+            const dict = { '主页':'Home', '教育':'Edu', '项目':'Proj', '技能':'Skill', '荣誉':'Award', '联系':'Contact' };
+            return dict[text] || text;
+        }
 
+        // === 通用功能 ===
+        function toggleSidebar() {
+            sidebar.classList.toggle('active');
+        }
+
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            document.querySelectorAll('[data-zh]').forEach(el => {
+                el.innerText = el.getAttribute(`data-${currentLang}`);
+            });
+            updateGuideLabels(currentFace);
+        }
+
+        // === 桌面端鼠标拖拽 (仅在非移动端生效) ===
         document.addEventListener('mousedown', (e) => {
-            // 只有在scene区域才触发
-            if(!e.target.closest('.scene')) return;
+            if (window.innerWidth <= 768 || !e.target.closest('.scene')) return;
             isDragging = true;
             startX = e.clientX;
             startY = e.clientY;
-            cube.style.transition = 'none'; // 拖拽时移除过渡动画以获得实时感
+            cube.style.transition = 'none';
         });
 
         document.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
             const deltaX = e.clientX - startX;
             const deltaY = e.clientY - startY;
-            
-            // 实时跟随鼠标微动 (Parallax效果)
-            cube.style.transform = `rotateX(${currentRotateX - deltaY * 0.2}deg) rotateY(${currentRotateY + deltaX * 0.2}deg)`;
+            cube.style.transform = `rotateX(${rotX - deltaY * 0.2}deg) rotateY(${rotY + deltaX * 0.2}deg)`;
         });
 
         document.addEventListener('mouseup', (e) => {
             if (!isDragging) return;
             isDragging = false;
-            cube.style.transition = 'transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; // 恢复弹力动画
-
-            const deltaX = e.clientX - startX;
-            const deltaY = e.clientY - startY;
-            const threshold = 100; // 拖拽灵敏度
-
-            // 判断主要移动方向
-            if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                // 水平移动
-                if (Math.abs(deltaX) > threshold) {
-                    if (deltaX > 0) currentRotateY += 90; // 向右拖，看左面
-                    else currentRotateY -= 90; // 向左拖，看右面
-                }
+            cube.style.transition = 'transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            
+            // 简单的手势判定
+            if (Math.abs(dx) > 100) {
+                if (dx > 0) navigateTo(navMap[currentFace].left[0]); // 向右拖 -> 去左面
+                else navigateTo(navMap[currentFace].right[0]);
+            } else if (Math.abs(dy) > 100) {
+                if (dy > 0) navigateTo(navMap[currentFace].top[0]); // 向下拖 -> 去顶面
+                else navigateTo(navMap[currentFace].bottom[0]);
             } else {
-                // 垂直移动 (限制垂直翻转，避免万向节死锁带来的混乱，或者仅允许回到正面后上下翻)
-                // 简化版：允许任意垂直翻转
-                if (Math.abs(deltaY) > threshold) {
-                    if (deltaY > 0) currentRotateX -= 90; // 向下拖，看上面
-                    else currentRotateX += 90; // 向上拖，看下面
-                }
+                // 回弹
+                navigateTo(currentFace);
             }
-
-            // 规范化角度为 90 的倍数，确保正对屏幕
-            currentRotateX = Math.round(currentRotateX / 90) * 90;
-            currentRotateY = Math.round(currentRotateY / 90) * 90;
-
-            updateCube();
-        });
-        
-        // 触摸屏支持
-        document.addEventListener('touchstart', (e) => {
-             if(!e.target.closest('.scene')) return;
-             startX = e.touches[0].clientX;
-             startY = e.touches[0].clientY;
-             isDragging = true;
-             cube.style.transition = 'none';
-        });
-        
-        document.addEventListener('touchend', (e) => {
-             if(!isDragging) return;
-             isDragging = false;
-             cube.style.transition = 'transform 1s';
-             const endX = e.changedTouches[0].clientX;
-             const endY = e.changedTouches[0].clientY;
-             const deltaX = endX - startX;
-             const deltaY = endY - startY;
-             
-             if (Math.abs(deltaX) > 50) {
-                 if (deltaX > 0) currentRotateY += 90;
-                 else currentRotateY -= 90;
-             } else if (Math.abs(deltaY) > 50) {
-                 if (deltaY > 0) currentRotateX -= 90;
-                 else currentRotateX += 90;
-             }
-             
-             currentRotateX = Math.round(currentRotateX / 90) * 90;
-             currentRotateY = Math.round(currentRotateY / 90) * 90;
-             updateCube();
         });
 
     </script>
