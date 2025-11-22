@@ -32,14 +32,10 @@
         
         /* ================= 侧边栏 ================= */
         .sidebar {
-            width: var(--sidebar-width);
-            background: var(--sidebar-bg);
-            height: 100vh;
-            position: fixed; left: 0; top: 0;
-            padding: 30px 20px;
+            width: var(--sidebar-width); background: var(--sidebar-bg); height: 100vh;
+            position: fixed; left: 0; top: 0; padding: 30px 20px;
             display: flex; flex-direction: column; justify-content: space-between;
-            box-shadow: var(--shadow); z-index: 100;
-            transition: var(--transition);
+            box-shadow: var(--shadow); z-index: 100; transition: var(--transition);
         }
 
         .sb-top { text-align: center; }
@@ -47,55 +43,47 @@
         .avatar img { width: 100%; height: 100%; object-fit: cover; }
         .name { font-size: 1.4rem; font-weight: 700; margin-bottom: 5px; }
         
-        /* --- 统计区域样式 (View & Like) --- */
+        /* --- 统计区域 (核心修改) --- */
         .stats-container {
-            display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;
+            display: flex; justify-content: center; gap: 12px; margin-bottom: 20px;
         }
         
-        /* 浏览量胶囊 */
-        .stat-box {
-            display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-sub);
+        /* 胶囊样式 */
+        .stat-box, .like-btn {
+            display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-sub);
             background: #f8f9fa; padding: 6px 12px; border-radius: 20px; border: 1px solid #eee;
+            transition: all 0.3s;
         }
 
-        /* 点赞按钮样式 */
-        .like-btn {
-            display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-sub);
-            background: #f8f9fa; padding: 6px 12px; border-radius: 20px; border: 1px solid #eee;
-            cursor: pointer; transition: all 0.3s; outline: none;
-        }
+        /* 点赞按钮特有样式 */
+        .like-btn { cursor: pointer; outline: none; }
         .like-btn:hover { background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transform: translateY(-1px); }
         
-        /* 点赞激活状态 */
+        /* 点赞激活状态 (红色) */
         .like-btn.liked {
             background: #fff0f0; border-color: #ffdcdc; color: var(--like-color);
         }
         .like-btn.liked i { animation: heartBeat 0.4s ease-in-out forwards; }
         
-        /* 数字样式 */
-        .stat-num { font-weight: 700; font-family: 'Courier New', monospace; }
+        .stat-num { font-weight: 700; font-family: 'Courier New', monospace; min-width: 10px; }
 
         @keyframes heartBeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
+            0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); }
         }
 
-        /* 地址 */
         .address-box { font-size: 0.8rem; color: var(--text-sub); margin-bottom: 20px; text-align: left; padding: 12px; background: #f8f9fa; border-radius: var(--radius); border: 1px solid #eee; }
         .address-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
 
-        /* 导航 */
+        /* 导航链接 */
         .nav-links { display: flex; flex-direction: column; gap: 8px; width: 100%; }
         .nav-item { 
             padding: 12px 15px; border-radius: 10px; cursor: pointer; transition: all 0.2s; 
-            font-weight: 500; display: flex; align-items: center; gap: 12px; 
-            color: var(--text-sub);
+            font-weight: 500; display: flex; align-items: center; gap: 12px; color: var(--text-sub);
         }
         .nav-item:hover { background: #f8f9fa; color: var(--text-main); transform: translateX(5px); }
         .nav-item.active { background: var(--accent-light); color: var(--accent-color); font-weight: 600; }
 
-        /* 底部 */
+        /* 底部控制区 */
         .sb-bottom { margin-top: auto; }
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
         .contact-btn { 
@@ -137,7 +125,7 @@
         .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
         .tag { padding: 4px 12px; background: #f0f2f5; color: var(--text-main); border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
 
-        /* 顶部导航相关 (默认隐藏) */
+        /* Top Nav Elements (Hidden by default) */
         .top-nav-bar { display: none; }
         .main-header-info { display: none; }
         .footer-contacts { display: none; }
@@ -157,20 +145,17 @@
         body.layout-top-nav .top-menu .nav-item:hover { background: var(--bg-color); transform: none; }
         body.layout-top-nav .top-actions { display: flex; gap: 15px; align-items: center; }
 
-        /* Top Mode Header Info */
         body.layout-top-nav .main-header-info {
             display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 40px;
             background: #fff; padding: 25px; border-radius: var(--radius); box-shadow: var(--shadow);
             align-items: center; justify-content: space-between;
             animation: fadeIn 0.6s;
         }
-
         body.layout-top-nav .footer-contacts {
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 60px; padding-top: 30px; border-top: 1px solid #eee;
         }
         body.layout-top-nav .footer-contacts .contact-btn { background: #fff; box-shadow: var(--shadow); }
 
-        /* Mobile */
         .mobile-toggle { display: none; position: fixed; top: 20px; right: 20px; z-index: 2000; background: var(--accent-color); color: #fff; border: none; padding: 10px; border-radius: 8px; cursor: pointer; }
 
         @media (max-width: 768px) {
@@ -218,11 +203,11 @@
                 <div class="stats-container">
                     <div class="stat-box" title="Total Views">
                         <i class="fas fa-eye" style="color:var(--accent-color)"></i>
-                        <span id="busuanzi_value_site_pv" class="stat-num"><i class="fas fa-spinner fa-spin"></i></span>
+                        <span id="busuanzi_value_site_pv" class="stat-num">...</span>
                     </div>
                     <button class="like-btn" id="like-btn-sidebar" onclick="handleLike()">
                         <i class="fas fa-heart"></i>
-                        <span class="stat-num" id="like-count-sidebar">856</span>
+                        <span id="busuanzi_value_site_uv" class="stat-num">...</span>
                     </button>
                 </div>
 
@@ -247,7 +232,6 @@
                     <a href="mailto:3407844687@qq.com" class="contact-btn"><i class="fas fa-envelope"></i></a>
                     <a href="https://github.com/Dreamlights001/" target="_blank" class="contact-btn"><i class="fab fa-github"></i></a>
                 </div>
-
                 <button class="toggle-btn-rect" onclick="toggleLayout()">
                     <i class="fas fa-exchange-alt"></i> <span data-i18n="switch_layout">切换布局</span>
                 </button>
@@ -262,11 +246,11 @@
                     <div class="stats-container" style="justify-content: flex-start; margin-top:10px; margin-bottom:0;">
                         <div class="stat-box">
                             <i class="fas fa-eye" style="color:var(--accent-color)"></i>
-                            <span id="busuanzi_val_sync_top" class="stat-num">...</span>
+                            <span id="sync_site_pv" class="stat-num">...</span>
                         </div>
                         <button class="like-btn" id="like-btn-top" onclick="handleLike()">
                             <i class="fas fa-heart"></i>
-                            <span class="stat-num" id="like-count-top">856</span>
+                            <span id="sync_site_uv" class="stat-num">...</span>
                         </button>
                     </div>
                 </div>
@@ -382,71 +366,36 @@
                 <a href="mailto:3407844687@qq.com" class="contact-btn"><i class="fas fa-envelope"></i> <span style="margin-left:8px;">Email</span></a>
                 <a href="https://github.com/Dreamlights001/" target="_blank" class="contact-btn"><i class="fab fa-github"></i> <span style="margin-left:8px;">GitHub</span></a>
             </div>
-
             <div style="height: 50px;"></div>
         </main>
     </div>
 
     <script>
-        // 国际化内容
         const i18n = {
             zh: {
-                name: "王宇琛",
-                addr1: "吉林省长春市南关区",
-                addr2: "浙江省杭州市西湖区",
-                nav_about: "个人简介",
-                nav_edu: "教育背景",
-                nav_proj: "科研项目",
-                nav_award: "荣誉奖项",
-                nav_skill: "技术栈",
-                switch_layout: "切换布局",
-                about_title: "个人评价",
+                name: "王宇琛", addr1: "吉林省长春市南关区", addr2: "浙江省杭州市西湖区",
+                nav_about: "个人简介", nav_edu: "教育背景", nav_proj: "科研项目", nav_award: "荣誉奖项", nav_skill: "技术栈",
+                switch_layout: "切换布局", about_title: "个人评价",
                 about_text: "积极、自信、大胆、开朗。具备良好的理科和工科思维，对数学、计算机科学及智能领域感兴趣。具备跨学科思维与应用能力，能熟练掌握 Python、C++ 等编程语言。在机器视觉与大语言模型领域有深入研究，致力于探索 AI 在工业与网络安全领域的应用。",
-                edu_title: "教育经历",
-                uni_name: "吉林大学 (985/211)",
-                present: "至今",
-                major_1: "智能制造工程 (本科主修) | 机械与航空航天工程学院",
-                major_2: "计算机科学与技术 (本科辅修)",
+                edu_title: "教育经历", uni_name: "吉林大学 (985/211)", present: "至今",
+                major_1: "智能制造工程 (本科主修) | 机械与航空航天工程学院", major_2: "计算机科学与技术 (本科辅修)",
                 proj_title: "科研与项目",
-                proj_1_name: "智能可迁移跨项目漏洞检测模型",
-                proj_1_desc: "构建代码属性图(CPG)，结合图神经网络(GNN)与迁移学习技术，解决跨项目漏洞检测的适应性问题。负责数学模型构建、程序优化及文献调研。",
-                proj_2_name: "基于零样本的工业瑕疵检测",
-                proj_2_desc: "针对工业生产中小样本、多类瑕疵检测难点，结合 Zero-Shot Learning 与多模态融合技术。SOTA 性能复现与优化 (AnoVL, AnoCLIP+)。",
-                award_title: "获奖荣誉",
-                award_1: "第九届中国数据新闻大赛全国一等奖",
-                award_2: "第25届中国大学生数学竞赛吉林省一等奖",
-                award_3: "2024吉林大学物理竞赛校二等奖",
-                award_4: "2024/2025 MCM/ICM (Math Modeling) 队长",
-                skill_title: "技术栈"
+                proj_1_name: "智能可迁移跨项目漏洞检测模型", proj_1_desc: "构建代码属性图(CPG)，结合图神经网络(GNN)与迁移学习技术，解决跨项目漏洞检测的适应性问题。",
+                proj_2_name: "基于零样本的工业瑕疵检测", proj_2_desc: "针对工业生产中小样本、多类瑕疵检测难点，结合 Zero-Shot Learning 与多模态融合技术。",
+                award_title: "获奖荣誉", award_1: "第九届中国数据新闻大赛全国一等奖", award_2: "第25届中国大学生数学竞赛吉林省一等奖",
+                award_3: "2024吉林大学物理竞赛校二等奖", award_4: "2024/2025 MCM/ICM (Math Modeling) 队长", skill_title: "技术栈"
             },
             en: {
-                name: "Wang Yuchen",
-                addr1: "Changchun, Jilin",
-                addr2: "Hangzhou, Zhejiang",
-                nav_about: "About",
-                nav_edu: "Education",
-                nav_proj: "Projects",
-                nav_award: "Awards",
-                nav_skill: "Skills",
-                switch_layout: "Layout",
-                about_title: "About Me",
-                about_text: "Positive, confident, and open-minded with strong STEM thinking. Passionate about mathematics, CS, and AI. Skilled in Python and C++, with interdisciplinary capabilities. Focused on Computer Vision and LLMs, exploring AI applications in industrial and cyber security fields.",
-                edu_title: "Education",
-                uni_name: "Jilin University",
-                present: "Present",
-                major_1: "Intelligent Manufacturing Engineering (Major)",
-                major_2: "Computer Science and Technology (Minor)",
-                proj_title: "Projects",
-                proj_1_name: "Transferable Cross-Project Vulnerability Detection",
-                proj_1_desc: "Built Code Property Graphs (CPG) and combined GNN with transfer learning to solve adaptability issues in vulnerability detection.",
-                proj_2_name: "Zero-Shot Industrial Defect Detection",
-                proj_2_desc: "Addressed few-shot industrial defect detection challenges using Zero-Shot Learning and Multi-modal fusion. Optimized SOTA models like AnoVL and AnoCLIP+.",
-                award_title: "Honors & Awards",
-                award_1: "1st Prize, 9th China Data Journalism Competition",
-                award_2: "1st Prize (Jilin), 25th China Undergraduate Math Competition",
-                award_3: "2nd Prize, 2024 JLU Physics Competition",
-                award_4: "Team Leader, 2024/2025 MCM/ICM",
-                skill_title: "Tech Stack"
+                name: "Wang Yuchen", addr1: "Changchun, Jilin", addr2: "Hangzhou, Zhejiang",
+                nav_about: "About", nav_edu: "Education", nav_proj: "Projects", nav_award: "Awards", nav_skill: "Skills",
+                switch_layout: "Layout", about_title: "About Me",
+                about_text: "Positive, confident, and open-minded with strong STEM thinking. Passionate about mathematics, CS, and AI. Skilled in Python and C++.",
+                edu_title: "Education", uni_name: "Jilin University", present: "Present",
+                major_1: "Intelligent Manufacturing Engineering (Major)", major_2: "Computer Science (Minor)",
+                proj_title: "Projects", proj_1_name: "Vulnerability Detection Model", proj_1_desc: "Built Code Property Graphs (CPG) with GNN and transfer learning.",
+                proj_2_name: "Zero-Shot Defect Detection", proj_2_desc: "Addressed few-shot defect detection using Zero-Shot Learning and Multi-modal fusion.",
+                award_title: "Honors & Awards", award_1: "1st Prize, 9th China Data Journalism Competition", award_2: "1st Prize (Jilin), 25th Math Competition",
+                award_3: "2nd Prize, 2024 JLU Physics Competition", award_4: "Team Leader, 2024/2025 MCM/ICM", skill_title: "Tech Stack"
             }
         };
 
@@ -459,7 +408,8 @@
 
         function toggleLayout() {
             document.body.classList.toggle('layout-top-nav');
-            syncViewCount(); // 切换时同步一下浏览量显示
+            // 切换布局时，需要触发一次数据同步，以防顶部栏数字未更新
+            syncBusuanziData();
         }
 
         function toggleLang() {
@@ -468,12 +418,9 @@
         }
 
         function updateContent() {
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(el => {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (i18n[currentLang][key]) {
-                    el.innerText = i18n[currentLang][key];
-                }
+                if (i18n[currentLang][key]) el.innerText = i18n[currentLang][key];
             });
         }
 
@@ -481,76 +428,81 @@
             document.querySelector('.sidebar').classList.toggle('active');
         }
 
-        // ================= 点赞逻辑 =================
-        // 基础点赞数（为了让看起来不为0）
-        const BASE_LIKES = 856; 
-        let hasLiked = false;
-        
-        // 初始化点赞状态
-        function initLikes() {
-            const storedLike = localStorage.getItem('page_liked');
-            const storedCount = localStorage.getItem('like_count');
-            
-            // 如果本地有计数，用本地的，否则用基础值
-            let currentCount = storedCount ? parseInt(storedCount) : BASE_LIKES;
-            
-            updateLikeDisplay(currentCount, storedLike === 'true');
+        // ================= 不蒜子数据同步 & 点赞逻辑 =================
+
+        // 1. 数据同步器：因为HTML ID必须唯一，不蒜子只认 sidebar 里的ID
+        // 我们使用 Observer 监听 sidebar 里数字的变化，然后同步给 Topbar
+        function syncBusuanziData() {
+            const sourcePV = document.getElementById('busuanzi_value_site_pv');
+            const sourceUV = document.getElementById('busuanzi_value_site_uv'); // 这里用UV作为点赞数基数
+            const targetPV = document.getElementById('sync_site_pv');
+            const targetUV = document.getElementById('sync_site_uv');
+
+            if(sourcePV && targetPV) targetPV.innerText = sourcePV.innerText;
+            if(sourceUV && targetUV) targetUV.innerText = sourceUV.innerText;
         }
 
-        // 处理点击
+        // 启动监听
+        const observer = new MutationObserver(syncBusuanziData);
+        const config = { childList: true, subtree: true, characterData: true };
+        const observeTargets = [
+            document.getElementById('busuanzi_value_site_pv'),
+            document.getElementById('busuanzi_value_site_uv')
+        ];
+        
+        observeTargets.forEach(target => {
+            if(target) observer.observe(target, config);
+        });
+
+        // 2. 点赞点击逻辑 (视觉欺骗 + 本地记录)
+        let hasLiked = false;
+
+        function initLikes() {
+            // 检查本地是否已经点赞，保持红色状态
+            if(localStorage.getItem('has_liked') === 'true') {
+                hasLiked = true;
+                document.getElementById('like-btn-sidebar').classList.add('liked');
+                document.getElementById('like-btn-top').classList.add('liked');
+                // 如果已点赞，视觉上保持已点赞的图标
+                document.querySelectorAll('.like-btn i').forEach(i => i.className = "fas fa-heart");
+            }
+        }
+
         function handleLike() {
             if (hasLiked) {
                 alert(currentLang === 'zh' ? "您已经点过赞了，谢谢！" : "You already liked this page, thanks!");
                 return;
             }
 
-            let currentCount = parseInt(document.getElementById('like-count-sidebar').innerText);
-            currentCount++;
-
-            // 保存状态
-            localStorage.setItem('page_liked', 'true');
-            localStorage.setItem('like_count', currentCount);
-
-            updateLikeDisplay(currentCount, true);
-        }
-
-        // 更新UI (同步 Sidebar 和 Topbar)
-        function updateLikeDisplay(count, liked) {
-            hasLiked = liked;
-            const btns = [document.getElementById('like-btn-sidebar'), document.getElementById('like-btn-top')];
-            const counts = [document.getElementById('like-count-sidebar'), document.getElementById('like-count-top')];
-
-            counts.forEach(el => { if(el) el.innerText = count; });
+            // 1. 视觉变红
+            hasLiked = true;
+            localStorage.setItem('has_liked', 'true');
             
-            if (liked) {
-                btns.forEach(btn => {
-                    if(btn) {
-                        btn.classList.add('liked');
-                        btn.querySelector('i').className = "fas fa-heart"; // 实心爱心
-                    }
-                });
-            }
-        }
+            const btns = [document.getElementById('like-btn-sidebar'), document.getElementById('like-btn-top')];
+            btns.forEach(btn => {
+                if(btn) {
+                    btn.classList.add('liked');
+                    btn.querySelector('i').className = "fas fa-heart";
+                }
+            });
 
-        // 同步浏览量到顶部导航栏 (因为不蒜子只认一个ID)
-        function syncViewCount() {
-            const original = document.getElementById('busuanzi_value_site_pv');
-            const target = document.getElementById('busuanzi_val_sync_top');
-            if (original && target) {
-                // 简单的观察器，当不蒜子加载完成后同步数值
-                const observer = new MutationObserver(() => {
-                    target.innerText = original.innerText;
-                });
-                observer.observe(original, { childList: true, characterData: true, subtree: true });
-                // 初始也尝试同步一次
-                if(original.innerText) target.innerText = original.innerText;
-            }
+            // 2. 数字+1 (视觉效果)
+            // 注意：不蒜子接口是只读的，我们只能在前端假装+1，实际数据是UV数
+            const uvSpans = [document.getElementById('busuanzi_value_site_uv'), document.getElementById('sync_site_uv')];
+            uvSpans.forEach(span => {
+                let currentVal = parseInt(span.innerText);
+                if (!isNaN(currentVal)) {
+                    span.innerText = currentVal + 1;
+                }
+            });
         }
 
         window.onload = () => {
             updateContent();
             initLikes();
-            syncViewCount();
+            // 稍微延迟一下确保不蒜子加载后再同步一次
+            setTimeout(syncBusuanziData, 1000);
+            setTimeout(syncBusuanziData, 3000);
         };
     </script>
 </body>
