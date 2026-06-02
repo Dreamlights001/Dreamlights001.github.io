@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -86,6 +86,8 @@
 
         .address-box { font-size: 0.8rem; color: var(--text-sub); margin-bottom: 20px; text-align: left; padding: 12px; background: #f8f9fa; border-radius: var(--radius); border: 1px solid #eee; }
         .address-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+        .address-link { color: inherit; transition: color 0.2s; }
+        .address-link:hover { color: var(--accent-color); text-decoration: underline; }
 
         .nav-links { display: flex; flex-direction: column; gap: 8px; width: 100%; }
         .nav-item { 
@@ -158,7 +160,7 @@
             animation: fadeIn 0.6s;
         }
         body.layout-top-nav .footer-contacts {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 60px; padding-top: 30px; border-top: 1px solid #eee;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 20px; margin-top: 60px; padding-top: 30px; border-top: 1px solid #eee;
         }
 
         .mobile-toggle { display: none; position: fixed; top: 20px; right: 20px; z-index: 2100; background: var(--accent-color); color: #fff; border: none; padding: 10px; border-radius: 8px; cursor: pointer; }
@@ -189,16 +191,16 @@
     <nav class="top-nav-bar">
         <div class="name" style="font-size: 1.2rem;">Wang Yuchen</div>
         <div class="top-menu">
-            <a href="#about" class="nav-item" data-i18n="nav_about">关于</a>
-            <a href="#education" class="nav-item" data-i18n="nav_edu">教育</a>
-            <a href="#projects" class="nav-item" data-i18n="nav_proj">项目</a>
-            <a href="#awards" class="nav-item" data-i18n="nav_award">荣誉</a>
+            <a href="#about" class="nav-item" data-i18n="nav_about">About</a>
+            <a href="#education" class="nav-item" data-i18n="nav_edu">Education</a>
+            <a href="#projects" class="nav-item" data-i18n="nav_proj">Projects</a>
+            <a href="#awards" class="nav-item" data-i18n="nav_award">Awards</a>
         </div>
         <div class="top-actions">
             <button class="toggle-btn-rect" style="width: auto; margin:0;" onclick="toggleLayout()">
                 <i class="fas fa-columns"></i>
             </button>
-            <button class="lang-btn" style="width: auto; padding: 8px 15px;" onclick="toggleLang()">ZH/EN</button>
+            <button class="lang-btn" style="width: auto; padding: 8px 15px;" onclick="toggleLang()">中文</button>
         </div>
     </nav>
 
@@ -208,7 +210,7 @@
                 <div class="avatar">
                     <img src="https://ui-avatars.com/api/?name=Wang+Yuchen&background=3498db&color=fff&size=200" alt="Avatar">
                 </div>
-                <div class="name" data-i18n="name">王宇琛</div>
+                <div class="name" data-i18n="name">Wang Yuchen</div>
                 
                 <div class="stats-container">
                     <div class="stat-box">
@@ -217,21 +219,22 @@
                     </div>
                     <button class="like-btn" id="like-btn-sidebar" onclick="handleLike()">
                         <i class="fas fa-heart"></i>
-                        <span id="busuanzi_value_site_uv" class="stat-num">...</span>
+                        <span id="like_count_sidebar" class="stat-num">0</span>
                     </button>
+                    <span id="busuanzi_value_site_uv" style="display:none;"></span>
                 </div>
 
                 <div class="address-box">
-                    <div class="address-item"><i class="fas fa-map-marker-alt" style="color:var(--accent-color)"></i> <span data-i18n="addr1">吉林省长春市</span></div>
-                    <div class="address-item"><i class="fas fa-map-pin" style="color:var(--accent-color)"></i> <span data-i18n="addr2">浙江省杭州市</span></div>
+                    <div class="address-item"><i class="fas fa-map-marker-alt" style="color:var(--accent-color)"></i> <a class="address-link" href="https://www.google.com/maps/search/?api=1&query=Jilin%20University%20Nanling%20Campus%2C%205988%20Renmin%20Street%2C%20Nanguan%20District%2C%20Changchun%2C%20Jilin%2C%20China" target="_blank" rel="noopener noreferrer" data-i18n="addr1">Jilin University Nanling Campus, 5988 Renmin Street, Nanguan District, Changchun</a></div>
+                    <div class="address-item"><i class="fas fa-map-pin" style="color:var(--accent-color)"></i> <a class="address-link" href="https://www.google.com/maps/search/?api=1&query=Zhejiang%20University%20Zijingang%20Campus%2C%20866%20Yuhangtang%20Road%2C%20Hangzhou%2C%20China" target="_blank" rel="noopener noreferrer" data-i18n="addr2">Zhejiang University Zijingang Campus, 866 Yuhangtang Road, Hangzhou</a></div>
                 </div>
 
                 <nav class="nav-links">
-                    <a href="#about" class="nav-item active" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-user"></i> <span data-i18n="nav_about">个人简介</span></a>
-                    <a href="#education" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-graduation-cap"></i> <span data-i18n="nav_edu">教育背景</span></a>
-                    <a href="#projects" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-code-branch"></i> <span data-i18n="nav_proj">科研项目</span></a>
-                    <a href="#awards" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-trophy"></i> <span data-i18n="nav_award">荣誉奖项</span></a>
-                    <a href="#skills" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-tools"></i> <span data-i18n="nav_skill">技术栈</span></a>
+                    <a href="#about" class="nav-item active" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-user"></i> <span data-i18n="nav_about">About</span></a>
+                    <a href="#education" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-graduation-cap"></i> <span data-i18n="nav_edu">Education</span></a>
+                    <a href="#projects" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-code-branch"></i> <span data-i18n="nav_proj">Projects</span></a>
+                    <a href="#awards" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-trophy"></i> <span data-i18n="nav_award">Awards</span></a>
+                    <a href="#skills" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-tools"></i> <span data-i18n="nav_skill">Skills</span></a>
                 </nav>
             </div>
 
@@ -239,13 +242,14 @@
                 <div class="contact-grid">
                     <a href="tencent://message/?uin=3407844687" class="contact-btn"><i class="fab fa-qq"></i></a>
                     <a href="#" class="contact-btn" onclick="alert('WeChat ID: DreamLights001')"><i class="fab fa-weixin"></i></a>
-                    <a href="mailto:3407844687@qq.com" class="contact-btn"><i class="fas fa-envelope"></i></a>
+                    <a href="mailto:16627863893@163.com" class="contact-btn"><i class="fas fa-envelope"></i></a>
                     <a href="https://github.com/Dreamlights001/" target="_blank" class="contact-btn"><i class="fab fa-github"></i></a>
+                    <a href="https://orcid.org/0009-0001-4442-6068" target="_blank" class="contact-btn" aria-label="ORCID"><i class="fab fa-orcid"></i></a>
                 </div>
                 <button class="toggle-btn-rect" onclick="toggleLayout()">
-                    <i class="fas fa-exchange-alt"></i> <span data-i18n="switch_layout">切换布局</span>
+                    <i class="fas fa-exchange-alt"></i> <span data-i18n="switch_layout">Layout</span>
                 </button>
-                <button class="lang-btn" onclick="toggleLang()">ZH / EN</button>
+                <button class="lang-btn" onclick="toggleLang()">中文</button>
             </div>
         </aside>
         <div class="sidebar-overlay" onclick="closeMobileMenu()"></div>
@@ -253,7 +257,7 @@
         <main class="main-content">
             <div class="main-header-info">
                 <div>
-                    <h2 data-i18n="name">王宇琛</h2>
+                    <h2 data-i18n="name">Wang Yuchen</h2>
                     <div class="stats-container" style="justify-content: flex-start; margin-top:10px; margin-bottom:0;">
                         <div class="stat-box">
                             <i class="fas fa-eye" style="color:var(--accent-color)"></i>
@@ -261,32 +265,45 @@
                         </div>
                         <button class="like-btn" id="like-btn-top" onclick="handleLike()">
                             <i class="fas fa-heart"></i>
-                            <span id="sync_site_uv" class="stat-num">...</span>
+                            <span id="like_count_top" class="stat-num">0</span>
                         </button>
                     </div>
                 </div>
                 <div style="text-align: right; font-size: 0.9rem; color: #666;">
-                    <div><i class="fas fa-map-marker-alt"></i> <span data-i18n="addr1">吉林省长春市南关区</span></div>
-                    <div style="margin-top:5px;"><i class="fas fa-map-pin"></i> <span data-i18n="addr2">浙江省杭州市西湖区</span></div>
+                    <div><i class="fas fa-map-marker-alt"></i> <a class="address-link" href="https://www.google.com/maps/search/?api=1&query=Jilin%20University%20Nanling%20Campus%2C%205988%20Renmin%20Street%2C%20Nanguan%20District%2C%20Changchun%2C%20Jilin%2C%20China" target="_blank" rel="noopener noreferrer" data-i18n="addr1">Jilin University Nanling Campus, 5988 Renmin Street, Nanguan District, Changchun</a></div>
+                    <div style="margin-top:5px;"><i class="fas fa-map-pin"></i> <a class="address-link" href="https://www.google.com/maps/search/?api=1&query=Zhejiang%20University%20Zijingang%20Campus%2C%20866%20Yuhangtang%20Road%2C%20Hangzhou%2C%20China" target="_blank" rel="noopener noreferrer" data-i18n="addr2">Zhejiang University Zijingang Campus, 866 Yuhangtang Road, Hangzhou</a></div>
                 </div>
             </div>
 
             <section id="about" class="section">
-                <h2 class="section-title" data-i18n="about_title">个人评价</h2>
+                <h2 class="section-title" data-i18n="about_title">About Me</h2>
                 <p style="line-height: 1.8; color: #555;" data-i18n="about_text">
-                    对数学、计算机科学及智能领域感兴趣。具备跨学科思维与应用能力，能熟练掌握 Python、C++ 等编程语言。在机器视觉与大语言模型领域有深入研究，致力于探索 AI 在工业与网络安全领域的应用。
+                    I am interested in mathematics, computer science, and intelligent systems, with an interdisciplinary background in intelligent manufacturing and computer science. My current interests include AI4S, computer vision, VLM, VLA, and industrial agents.
                 </p>
             </section>
 
             <section id="education" class="section">
-                <h2 class="section-title" data-i18n="edu_title">教育经历</h2>
+                <h2 class="section-title" data-i18n="edu_title">Education</h2>
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title" data-i18n="uni_name">吉林大学 (985/211)</div>
-                        <div class="card-meta">2023.08 - <span data-i18n="present">至今</span></div>
+                        <div class="card-title" data-i18n="zju_name">Zhejiang University</div>
+                        <div class="card-meta">2026.09 - 2029.06</div>
                     </div>
-                    <p data-i18n="major_1">智能制造工程 (本科主修) | 机械与航空航天工程学院</p>
-                    <p data-i18n="major_2">计算机科学与技术 (本科辅修)</p>
+                    <p data-i18n="zju_degree">M.Eng. in Mechanical Engineering, Institute of Design Engineering; recommended admission with exam exemption.</p>
+                    <div class="tags" style="margin-top:10px;">
+                        <span class="tag">AI4S</span>
+                        <span class="tag">VLM</span>
+                        <span class="tag">VLA</span>
+                        <span class="tag">Industrial Agent</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title" data-i18n="uni_name">Jilin University</div>
+                        <div class="card-meta">2023.08 - <span data-i18n="present">Present</span></div>
+                    </div>
+                    <p data-i18n="major_1">B.S. in Intelligent Manufacturing Engineering, School of Mechanical and Aerospace Engineering.</p>
+                    <p data-i18n="major_2">Minor in Computer Science and Technology, School of Computer Science and Technology.</p>
                     <div class="tags" style="margin-top:10px;">
                         <span class="tag">GPA 86.0</span>
                         <span class="tag">Rank 9/30</span>
@@ -296,28 +313,18 @@
             </section>
 
             <section id="projects" class="section">
-                <h2 class="section-title" data-i18n="proj_title">科研与项目</h2>
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title" data-i18n="proj_1_name">智能可迁移跨项目漏洞检测模型</div>
-                        <div class="card-meta">Network Security / GNN</div>
-                    </div>
-                    <p style="margin-bottom:10px; font-size:0.95rem; color:#555;" data-i18n="proj_1_desc">
-                        构建代码属性图(CPG)，结合图神经网络(GNN)与迁移学习技术，解决跨项目漏洞检测的适应性问题。负责数学模型构建、程序优化及文献调研。
-                    </p>
-                </div>
-
+                <h2 class="section-title" data-i18n="proj_title">Research & Projects</h2>
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
                             <a href="https://github.com/Dreamlights001/myZSAD" target="_blank" style="display:flex; align-items:center; gap:10px;">
-                                <span data-i18n="proj_2_name">基于零样本的工业瑕疵检测</span> <i class="fas fa-external-link-alt" style="font-size:0.8rem;"></i>
+                                <span data-i18n="proj_1_name">Zero-Shot Industrial Defect Detection</span> <i class="fas fa-external-link-alt" style="font-size:0.8rem;"></i>
                             </a>
                         </div>
-                        <div class="card-meta">CV / Multi-modal</div>
+                        <div class="card-meta">Computer Vision / Multimodal / Industrial Inspection</div>
                     </div>
-                    <p style="margin-bottom:10px; font-size:0.95rem; color:#555;" data-i18n="proj_2_desc">
-                        针对工业生产中小样本、多类瑕疵检测难点，结合 Zero-Shot Learning 与多模态融合技术。SOTA 性能复现与优化 (AnoVL, AnoCLIP+)。
+                    <p style="margin-bottom:10px; font-size:0.95rem; color:#555;" data-i18n="proj_1_desc">
+                        Led literature review, model design, and implementation for zero-shot defect detection. The work builds on AnoVL/AnoCLIP+ with prompt templates and adapter-based optimization; one related invention patent application has passed first-stage review.
                     </p>
                     <div class="tags">
                         <span class="tag">Python</span>
@@ -326,46 +333,80 @@
                         <span class="tag">CLIP</span>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <a href="https://github.com/Dreamlights001/Bearing-CLIP" target="_blank" style="display:flex; align-items:center; gap:10px;">
+                                <span data-i18n="proj_2_name">Bearing Fault Diagnosis Based on Vibration Signals</span> <i class="fas fa-external-link-alt" style="font-size:0.8rem;"></i>
+                            </a>
+                        </div>
+                        <div class="card-meta">Research Training / Fault Diagnosis</div>
+                    </div>
+                    <p style="margin-bottom:10px; font-size:0.95rem; color:#555;" data-i18n="proj_2_desc">
+                        A research training portfolio project on bearing fault diagnosis using vibration signals.
+                    </p>
+                </div>
             </section>
 
             <section id="awards" class="section">
-                <h2 class="section-title" data-i18n="award_title">获奖荣誉</h2>
+                <h2 class="section-title" data-i18n="award_title">Honors & Awards</h2>
                 <div class="card">
                     <ul style="list-style: none; padding: 0;">
                         <li style="margin-bottom: 12px; display:flex; align-items:center; gap:10px;">
-                            <i class="fas fa-medal" style="color: gold; font-size:1.1rem;"></i> <span data-i18n="award_1">第九届中国数据新闻大赛全国一等奖</span>
+                            <i class="fas fa-medal" style="color: gold; font-size:1.1rem;"></i> <span data-i18n="award_1">First Prize, 25th China Undergraduate Mathematics Competition, Jilin Province</span>
                         </li>
                         <li style="margin-bottom: 12px; display:flex; align-items:center; gap:10px;">
-                            <i class="fas fa-medal" style="color: silver; font-size:1.1rem;"></i> <span data-i18n="award_2">第25届中国大学生数学竞赛吉林省一等奖</span>
+                            <i class="fas fa-medal" style="color: gold; font-size:1.1rem;"></i> <span data-i18n="award_2">First Prize, 2024 China Undergraduate Mathematical Contest in Modeling, Jilin Province</span>
                         </li>
                         <li style="margin-bottom: 12px; display:flex; align-items:center; gap:10px;">
-                            <i class="fas fa-medal" style="color: #cd7f32; font-size:1.1rem;"></i> <span data-i18n="award_3">2024吉林大学物理竞赛校二等奖</span>
+                            <i class="fas fa-medal" style="color: silver; font-size:1.1rem;"></i> <span data-i18n="award_3">Honorable Mention, 2025 Mathematical Contest in Modeling</span>
                         </li>
                         <li style="margin-bottom: 12px; display:flex; align-items:center; gap:10px;">
-                            <i class="fas fa-star" style="color: var(--accent-color); font-size:1.1rem;"></i> <span data-i18n="award_4">2024/2025 MCM/ICM (Math Modeling) 队长</span>
+                            <i class="fas fa-medal" style="color: gold; font-size:1.1rem;"></i> <span data-i18n="award_4">First Prize, 2025 China Collegiate Computing Design Competition, Jilin Province</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display:flex; align-items:center; gap:10px;">
+                            <i class="fas fa-medal" style="color: gold; font-size:1.1rem;"></i> <span data-i18n="award_5">National First Prize, 9th China Data Journalism Competition</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display:flex; align-items:center; gap:10px;">
+                            <i class="fas fa-medal" style="color: silver; font-size:1.1rem;"></i> <span data-i18n="award_6">National Second Prize, 2025 Market Research and Analysis Competition</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display:flex; align-items:center; gap:10px;">
+                            <i class="fas fa-medal" style="color: #cd7f32; font-size:1.1rem;"></i> <span data-i18n="award_7">Third Prize, 2025 Lanqiao Cup Python Programming Contest, Jilin Province</span>
+                        </li>
+                        <li style="display:flex; align-items:center; gap:10px;">
+                            <i class="fas fa-medal" style="color: silver; font-size:1.1rem;"></i> <span data-i18n="award_8">Second Prize, 2024 Jilin University Physics Competition</span>
                         </li>
                     </ul>
                 </div>
             </section>
 
             <section id="skills" class="section">
-                <h2 class="section-title" data-i18n="skill_title">技术栈</h2>
+                <h2 class="section-title" data-i18n="skill_title">Skills</h2>
                 <div class="card">
-                    <h4 style="margin-bottom:10px;">Languages & Frameworks</h4>
+                    <h4 style="margin-bottom:10px;" data-i18n="skill_group_1">Languages & AI</h4>
                     <div class="tags">
                         <span class="tag">Python</span>
                         <span class="tag">C/C++</span>
                         <span class="tag">MATLAB</span>
                         <span class="tag">PyTorch</span>
                         <span class="tag">TensorFlow</span>
-                        <span class="tag">HTML/CSS</span>
+                        <span class="tag">Transformer</span>
+                        <span class="tag">CLIP</span>
+                        <span class="tag">SAM</span>
+                        <span class="tag">VLM</span>
+                        <span class="tag">VLA</span>
+                        <span class="tag">LLM API</span>
                     </div>
-                    <h4 style="margin-top:20px; margin-bottom:10px;">Engineering & Tools</h4>
+                    <h4 style="margin-top:20px; margin-bottom:10px;" data-i18n="skill_group_2">Engineering & Tools</h4>
                     <div class="tags">
                         <span class="tag">SolidWorks</span>
                         <span class="tag">CATIA</span>
                         <span class="tag">CAD</span>
                         <span class="tag">PLC</span>
+                        <span class="tag">LabVIEW</span>
+                        <span class="tag">Comsol</span>
+                        <span class="tag">Simulink</span>
+                        <span class="tag">Mujoco</span>
                         <span class="tag">Git</span>
                     </div>
                 </div>
@@ -374,8 +415,9 @@
             <div class="footer-contacts">
                 <a href="tencent://message/?uin=3407844687" class="contact-btn"><i class="fab fa-qq"></i> <span style="margin-left:8px;">QQ</span></a>
                 <a href="#" onclick="alert('WeChat ID: DreamLights001')" class="contact-btn"><i class="fab fa-weixin"></i> <span style="margin-left:8px;">WeChat</span></a>
-                <a href="mailto:3407844687@qq.com" class="contact-btn"><i class="fas fa-envelope"></i> <span style="margin-left:8px;">Email</span></a>
+                <a href="mailto:16627863893@163.com" class="contact-btn"><i class="fas fa-envelope"></i> <span style="margin-left:8px;">Email</span></a>
                 <a href="https://github.com/Dreamlights001/" target="_blank" class="contact-btn"><i class="fab fa-github"></i> <span style="margin-left:8px;">GitHub</span></a>
+                <a href="https://orcid.org/0009-0001-4442-6068" target="_blank" class="contact-btn"><i class="fab fa-orcid"></i> <span style="margin-left:8px;">ORCID</span></a>
             </div>
             <div style="height: 50px;"></div>
         </main>
@@ -384,33 +426,37 @@
     <script>
         const i18n = {
             zh: {
-                name: "王宇琛", addr1: "吉林省长春市南关区", addr2: "浙江省杭州市西湖区",
+                name: "王宇琛", addr1: "长春市南关区人民大街5988号吉林大学南岭校区", addr2: "杭州市余杭塘路866号浙江大学紫金港校区",
                 nav_about: "个人简介", nav_edu: "教育背景", nav_proj: "科研项目", nav_award: "荣誉奖项", nav_skill: "技术栈",
                 switch_layout: "切换布局", about_title: "个人评价",
-                about_text: "对数学、计算机科学及智能领域感兴趣。具备跨学科思维与应用能力，能熟练掌握 Python、C++ 等编程语言。在机器视觉与大语言模型领域有深入研究，致力于探索 AI 在工业与网络安全领域的应用。",
-                edu_title: "教育经历", uni_name: "吉林大学 (985/211)", present: "至今",
-                major_1: "智能制造工程 (本科主修) | 机械与航空航天工程学院", major_2: "计算机科学与技术 (本科辅修)",
+                about_text: "对数学、计算机科学及智能领域感兴趣，具备智能制造工程与计算机科学交叉背景。当前关注 AI4S、计算机视觉、VLM、VLA 与工业 Agent。",
+                edu_title: "教育经历", zju_name: "浙江大学", zju_degree: "机械工程硕士，设计工程所；推免攻读硕士。", uni_name: "吉林大学", present: "至今",
+                major_1: "智能制造工程（本科主修）| 机械与航空航天工程学院", major_2: "计算机科学与技术（本科辅修）| 计算机科学与技术学院",
                 proj_title: "科研与项目",
-                proj_1_name: "智能可迁移跨项目漏洞检测模型", proj_1_desc: "构建代码属性图(CPG)，结合图神经网络(GNN)与迁移学习技术，解决跨项目漏洞检测的适应性问题。",
-                proj_2_name: "基于零样本的工业瑕疵检测", proj_2_desc: "针对工业生产中小样本、多类瑕疵检测难点，结合 Zero-Shot Learning 与多模态融合技术。",
-                award_title: "获奖荣誉", award_1: "第九届中国数据新闻大赛全国一等奖", award_2: "第25届中国大学生数学竞赛吉林省一等奖",
-                award_3: "2024吉林大学物理竞赛校二等奖", award_4: "2024/2025 MCM/ICM (Math Modeling) 队长", skill_title: "技术栈"
+                proj_1_name: "基于零样本的工业瑕疵检测", proj_1_desc: "负责文献检索、模型设计与代码实现，围绕小样本、多品类瑕疵检测开展零样本学习与多模态融合研究；基于 AnoVL/AnoCLIP+ 进行提示词模板与适配器优化，相关发明专利在投并已通过第一阶段审查。",
+                proj_2_name: "一种基于振动信号的轴承故障诊断模型", proj_2_desc: "科研训练作品，围绕振动信号开展轴承故障诊断模型实践。",
+                award_title: "获奖荣誉", award_1: "第25届中国大学生数学竞赛吉林省一等奖", award_2: "2024届中国大学生数学建模竞赛吉林省一等奖",
+                award_3: "2025美国大学生数学建模竞赛H奖", award_4: "2025高校计算机设计大赛吉林省一等奖", award_5: "第九届中国数据新闻大赛全国一等奖",
+                award_6: "2025全国大学生市场调查与分析大赛全国二等奖", award_7: "2025蓝桥杯Python程序设计软件赛吉林省三等奖", award_8: "2024吉林大学大学生物理竞赛校二等奖",
+                skill_title: "技术栈", skill_group_1: "编程与 AI", skill_group_2: "工程与工具"
             },
             en: {
-                name: "Wang Yuchen", addr1: "Changchun, Jilin", addr2: "Hangzhou, Zhejiang",
+                name: "Wang Yuchen", addr1: "Jilin University Nanling Campus, 5988 Renmin Street, Nanguan District, Changchun", addr2: "Zhejiang University Zijingang Campus, 866 Yuhangtang Road, Hangzhou",
                 nav_about: "About", nav_edu: "Education", nav_proj: "Projects", nav_award: "Awards", nav_skill: "Skills",
                 switch_layout: "Layout", about_title: "About Me",
-                about_text: "Positive, confident, and open-minded with strong STEM thinking. Passionate about mathematics, CS, and AI. Skilled in Python and C++.",
-                edu_title: "Education", uni_name: "Jilin University", present: "Present",
-                major_1: "Intelligent Manufacturing Engineering (Major)", major_2: "Computer Science (Minor)",
-                proj_title: "Projects", proj_1_name: "Vulnerability Detection Model", proj_1_desc: "Built Code Property Graphs (CPG) with GNN and transfer learning.",
-                proj_2_name: "Zero-Shot Defect Detection", proj_2_desc: "Addressed few-shot defect detection using Zero-Shot Learning and Multi-modal fusion.",
-                award_title: "Honors & Awards", award_1: "1st Prize, 9th China Data Journalism Competition", award_2: "1st Prize (Jilin), 25th Math Competition",
-                award_3: "2nd Prize, 2024 JLU Physics Competition", award_4: "Team Leader, 2024/2025 MCM/ICM", skill_title: "Tech Stack"
+                about_text: "I am interested in mathematics, computer science, and intelligent systems, with an interdisciplinary background in intelligent manufacturing and computer science. My current interests include AI4S, computer vision, VLM, VLA, and industrial agents.",
+                edu_title: "Education", zju_name: "Zhejiang University", zju_degree: "M.Eng. in Mechanical Engineering, Institute of Design Engineering; recommended admission with exam exemption.", uni_name: "Jilin University", present: "Present",
+                major_1: "B.S. in Intelligent Manufacturing Engineering, School of Mechanical and Aerospace Engineering.", major_2: "Minor in Computer Science and Technology, School of Computer Science and Technology.",
+                proj_title: "Research & Projects", proj_1_name: "Zero-Shot Industrial Defect Detection", proj_1_desc: "Led literature review, model design, and implementation for zero-shot defect detection. The work builds on AnoVL/AnoCLIP+ with prompt templates and adapter-based optimization; one related invention patent application has passed first-stage review.",
+                proj_2_name: "Bearing Fault Diagnosis Based on Vibration Signals", proj_2_desc: "A research training portfolio project on bearing fault diagnosis using vibration signals.",
+                award_title: "Honors & Awards", award_1: "First Prize, 25th China Undergraduate Mathematics Competition, Jilin Province", award_2: "First Prize, 2024 China Undergraduate Mathematical Contest in Modeling, Jilin Province",
+                award_3: "Honorable Mention, 2025 Mathematical Contest in Modeling", award_4: "First Prize, 2025 China Collegiate Computing Design Competition, Jilin Province", award_5: "National First Prize, 9th China Data Journalism Competition",
+                award_6: "National Second Prize, 2025 Market Research and Analysis Competition", award_7: "Third Prize, 2025 Lanqiao Cup Python Programming Contest, Jilin Province", award_8: "Second Prize, 2024 Jilin University Physics Competition",
+                skill_title: "Skills", skill_group_1: "Languages & AI", skill_group_2: "Engineering & Tools"
             }
         };
 
-        let currentLang = 'zh';
+        let currentLang = 'en';
 
         function setActive(element) {
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
@@ -431,6 +477,10 @@
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (i18n[currentLang][key]) el.innerText = i18n[currentLang][key];
+            });
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.innerText = currentLang === 'zh' ? 'EN' : '中文';
             });
         }
 
@@ -534,33 +584,49 @@
         // ================= 数据同步与点赞 =================
         function syncBusuanziData() {
             const sourcePV = document.getElementById('busuanzi_value_site_pv');
-            const sourceUV = document.getElementById('busuanzi_value_site_uv');
             const targetPV = document.getElementById('sync_site_pv');
-            const targetUV = document.getElementById('sync_site_uv');
 
             if(sourcePV && targetPV) targetPV.innerText = sourcePV.innerText;
-            if(sourceUV && targetUV) targetUV.innerText = sourceUV.innerText;
         }
 
         const observer = new MutationObserver(syncBusuanziData);
         const config = { childList: true, subtree: true, characterData: true };
         const observeTargets = [
-            document.getElementById('busuanzi_value_site_pv'),
-            document.getElementById('busuanzi_value_site_uv')
+            document.getElementById('busuanzi_value_site_pv')
         ];
         
         observeTargets.forEach(target => {
             if(target) observer.observe(target, config);
         });
 
+        const LIKE_STORAGE_KEY = 'resume_like_count';
+        const LIKE_FLAG_KEY = 'resume_has_liked';
         let hasLiked = false;
+
+        function getStoredLikeCount() {
+            const parsed = parseInt(localStorage.getItem(LIKE_STORAGE_KEY), 10);
+            return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
+        }
+
+        function syncLikeCount(count = getStoredLikeCount()) {
+            ['like_count_sidebar', 'like_count_top'].forEach(id => {
+                const span = document.getElementById(id);
+                if (span) span.innerText = String(count);
+            });
+        }
+
+        function setLikedState(isLiked) {
+            [document.getElementById('like-btn-sidebar'), document.getElementById('like-btn-top')].forEach(btn => {
+                if (!btn) return;
+                btn.classList.toggle('liked', isLiked);
+                btn.querySelector('i').className = "fas fa-heart";
+            });
+        }
+
         function initLikes() {
-            if(localStorage.getItem('has_liked') === 'true') {
-                hasLiked = true;
-                document.getElementById('like-btn-sidebar').classList.add('liked');
-                document.getElementById('like-btn-top').classList.add('liked');
-                document.querySelectorAll('.like-btn i').forEach(i => i.className = "fas fa-heart");
-            }
+            hasLiked = localStorage.getItem(LIKE_FLAG_KEY) === 'true';
+            syncLikeCount();
+            setLikedState(hasLiked);
         }
 
         function handleLike() {
@@ -569,23 +635,12 @@
                 return;
             }
             hasLiked = true;
-            localStorage.setItem('has_liked', 'true');
-            
-            const btns = [document.getElementById('like-btn-sidebar'), document.getElementById('like-btn-top')];
-            btns.forEach(btn => {
-                if(btn) {
-                    btn.classList.add('liked');
-                    btn.querySelector('i').className = "fas fa-heart";
-                }
-            });
+            localStorage.setItem(LIKE_FLAG_KEY, 'true');
 
-            const uvSpans = [document.getElementById('busuanzi_value_site_uv'), document.getElementById('sync_site_uv')];
-            uvSpans.forEach(span => {
-                let currentVal = parseInt(span.innerText);
-                if (!isNaN(currentVal)) {
-                    span.innerText = currentVal + 1;
-                }
-            });
+            const nextCount = getStoredLikeCount() + 1;
+            localStorage.setItem(LIKE_STORAGE_KEY, String(nextCount));
+            syncLikeCount(nextCount);
+            setLikedState(true);
         }
 
         window.onload = () => {

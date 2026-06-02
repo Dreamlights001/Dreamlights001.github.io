@@ -12,7 +12,7 @@ export const resumeData = {
       degree: "Master in Mechanical Engineering (Design Engineering)",
       institution: "Zhejiang University",
       dates: "Sept 2026 - June 2029",
-      details: "Recommended for admission (exempt from exam). Research: AI4S, VLM, Industrial Agent."
+      details: "Recommended for admission (exempt from exam). Research: AI4S, VLM, VLA, Industrial Agent."
     },
     {
       degree: "B.S. in Intelligent Manufacturing Engineering",
@@ -28,7 +28,7 @@ export const resumeData = {
     }
   ],
   skills: [
-    { category: "AI & CV", items: ["PyTorch", "TensorFlow", "Transformers", "CLIP", "SAM", "Large Vision Models"] },
+    { category: "AI & CV", items: ["PyTorch", "TensorFlow", "Transformers", "CLIP", "SAM", "VLM", "VLA", "Large Vision Models"] },
     { category: "Development", items: ["Python", "C/C++", "MATLAB", "Data Structures", "Git"] },
     { category: "Industrial", items: ["CAD", "CATIA", "SolidWorks", "PLC", "LabVIEW"] },
     { category: "Simulation", items: ["Comsol", "Mujoco", "Simulink"] }
@@ -38,11 +38,6 @@ export const resumeData = {
       title: "Zero-Shot Industrial Defect Detection",
       role: "Lead Researcher",
       desc: "Led development of a general defect detection model fusing visual and text features. Improved AnoVL framework with residual adapters. One patent pending."
-    },
-    {
-      title: "Intelligent Cross-Project Vulnerability Detection",
-      role: "Core Member",
-      desc: "Constructed semantic network graphs (CPG) and used GNNs for vulnerability detection. Focused on model transferability and commercial evaluation."
     }
   ],
   awards: [
