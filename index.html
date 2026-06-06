@@ -6,6 +6,7 @@
     <title>Wang Yuchen | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
     
     <style>
         :root {
@@ -79,6 +80,7 @@
         }
         .like-btn { cursor: pointer; outline: none; }
         .like-btn:hover { background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transform: translateY(-1px); }
+        .like-btn:disabled { cursor: wait; opacity: 0.65; transform: none; }
         .like-btn.liked { background: #fff0f0; border-color: #ffdcdc; color: var(--like-color); }
         .like-btn.liked i { animation: heartBeat 0.4s ease-in-out forwards; }
         .stat-num { font-weight: 700; font-family: 'Courier New', monospace; min-width: 10px; }
@@ -130,9 +132,11 @@
 
         .card { background: #fff; padding: 25px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 20px; border: 1px solid rgba(0,0,0,0.02); transition: transform 0.3s; }
         .card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-        .card-title { font-size: 1.2rem; font-weight: 600; }
-        .card-meta { font-size: 0.9rem; color: var(--text-sub); text-align: right; }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+        .card-title { font-size: 1.2rem; font-weight: 600; min-width: 0; }
+        .school-title { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
+        .school-logo { width: 24px; height: 24px; object-fit: contain; flex: 0 0 auto; }
+        .card-meta { font-size: 0.9rem; color: var(--text-sub); text-align: right; flex: 0 0 auto; }
         .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
         .tag { padding: 4px 12px; background: #f0f2f5; color: var(--text-main); border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
 
@@ -171,6 +175,8 @@
             .sidebar.active { transform: translateX(0); }
             .main-content { margin-left: 0; padding: 20px; }
             .mobile-toggle { display: block; }
+            .card-header { flex-wrap: wrap; }
+            .card-meta { text-align: left; }
             body.layout-top-nav .top-nav-bar { display: none; } 
         }
 
@@ -286,7 +292,10 @@
                 <h2 class="section-title" data-i18n="edu_title">Education</h2>
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title" data-i18n="zju_name">Zhejiang University</div>
+                        <div class="card-title school-title">
+                            <img class="school-logo" src="assets/zju-emblem.svg" alt="Zhejiang University logo" loading="lazy">
+                            <span data-i18n="zju_name">Zhejiang University</span>
+                        </div>
                         <div class="card-meta">2026.09 - 2029.06</div>
                     </div>
                     <p data-i18n="zju_degree">M.Eng. in Mechanical Engineering, Institute of Design Engineering; recommended admission with exam exemption.</p>
@@ -299,7 +308,10 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title" data-i18n="uni_name">Jilin University</div>
+                        <div class="card-title school-title">
+                            <img class="school-logo" src="assets/jlu-emblem.svg" alt="Jilin University logo" loading="lazy">
+                            <span data-i18n="uni_name">Jilin University</span>
+                        </div>
                         <div class="card-meta">2022.08 - <span data-i18n="present">Present</span></div>
                     </div>
                     <p data-i18n="major_1">B.S. in Intelligent Manufacturing Engineering, School of Mechanical and Aerospace Engineering.</p>
@@ -599,19 +611,40 @@
             if(target) observer.observe(target, config);
         });
 
-        const LIKE_STORAGE_KEY = 'resume_like_count';
+        const LIKE_WORKSPACE = 'dreamlights001-github-io';
+        const LIKE_COUNTER_NAME = 'resume-likes';
+        const LIKE_CACHE_KEY = 'resume_like_count';
         const LIKE_FLAG_KEY = 'resume_has_liked';
+        let likeCounter = null;
         let hasLiked = false;
+        let likeRequestPending = false;
 
-        function getStoredLikeCount() {
-            const parsed = parseInt(localStorage.getItem(LIKE_STORAGE_KEY), 10);
+        function getLikeCounter() {
+            if (likeCounter) return likeCounter;
+            if (!window.Counter) return null;
+            likeCounter = new window.Counter({ workspace: LIKE_WORKSPACE });
+            return likeCounter;
+        }
+
+        function getCachedLikeCount() {
+            const parsed = parseInt(localStorage.getItem(LIKE_CACHE_KEY), 10);
             return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
         }
 
-        function syncLikeCount(count = getStoredLikeCount()) {
+        function cacheLikeCount(count) {
+            localStorage.setItem(LIKE_CACHE_KEY, String(count));
+        }
+
+        function syncLikeCount(count = getCachedLikeCount()) {
             ['like_count_sidebar', 'like_count_top'].forEach(id => {
                 const span = document.getElementById(id);
                 if (span) span.innerText = String(count);
+            });
+        }
+
+        function setLikeButtonsDisabled(isDisabled) {
+            [document.getElementById('like-btn-sidebar'), document.getElementById('like-btn-top')].forEach(btn => {
+                if (btn) btn.disabled = isDisabled;
             });
         }
 
@@ -625,8 +658,22 @@
 
         function initLikes() {
             hasLiked = localStorage.getItem(LIKE_FLAG_KEY) === 'true';
-            syncLikeCount();
+            syncLikeCount(getCachedLikeCount());
             setLikedState(hasLiked);
+
+            const counter = getLikeCounter();
+            if (!counter) return;
+
+            counter.get(LIKE_COUNTER_NAME)
+                .then(result => {
+                    const count = Number(result.value);
+                    if (!Number.isFinite(count) || count < 0) return;
+                    cacheLikeCount(count);
+                    syncLikeCount(count);
+                })
+                .catch(error => {
+                    console.error('Error loading like count:', error);
+                });
         }
 
         function handleLike() {
@@ -634,13 +681,39 @@
                 alert(currentLang === 'zh' ? "您已经点过赞了，谢谢！" : "You already liked this page, thanks!");
                 return;
             }
-            hasLiked = true;
-            localStorage.setItem(LIKE_FLAG_KEY, 'true');
 
-            const nextCount = getStoredLikeCount() + 1;
-            localStorage.setItem(LIKE_STORAGE_KEY, String(nextCount));
-            syncLikeCount(nextCount);
-            setLikedState(true);
+            if (likeRequestPending) return;
+
+            const counter = getLikeCounter();
+            if (!counter) {
+                alert(currentLang === 'zh' ? "点赞服务暂时不可用，请稍后再试。" : "Like service is temporarily unavailable. Please try again later.");
+                return;
+            }
+
+            likeRequestPending = true;
+            setLikeButtonsDisabled(true);
+
+            counter.up(LIKE_COUNTER_NAME)
+                .then(result => {
+                    const count = Number(result.value);
+                    if (!Number.isFinite(count) || count < 0) {
+                        throw new Error('Invalid like count response');
+                    }
+
+                    hasLiked = true;
+                    localStorage.setItem(LIKE_FLAG_KEY, 'true');
+                    cacheLikeCount(count);
+                    syncLikeCount(count);
+                    setLikedState(true);
+                })
+                .catch(error => {
+                    console.error('Error updating like count:', error);
+                    alert(currentLang === 'zh' ? "点赞失败，请稍后再试。" : "Failed to like. Please try again later.");
+                })
+                .finally(() => {
+                    likeRequestPending = false;
+                    setLikeButtonsDisabled(false);
+                });
         }
 
         window.onload = () => {
