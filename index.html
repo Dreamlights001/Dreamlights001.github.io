@@ -183,6 +183,13 @@
             body.layout-top-nav .top-nav-bar { display: none; } 
         }
 
+        @media (min-width: 769px) and (max-width: 1100px) {
+            body.layout-top-nav .top-nav-bar { padding: 0 20px; }
+            body.layout-top-nav .top-menu { gap: 8px; }
+            body.layout-top-nav .top-menu .nav-item { padding: 10px 8px; font-size: 0.9rem; }
+            body.layout-top-nav .top-actions { gap: 8px; }
+        }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
 
@@ -202,6 +209,7 @@
         <div class="top-menu">
             <a href="#about" class="nav-item" data-i18n="nav_about">About</a>
             <a href="#education" class="nav-item" data-i18n="nav_edu">Education</a>
+            <a href="#experience" class="nav-item" data-i18n="nav_exp">Experience</a>
             <a href="#projects" class="nav-item" data-i18n="nav_proj">Projects</a>
             <a href="#awards" class="nav-item" data-i18n="nav_award">Awards</a>
         </div>
@@ -241,6 +249,7 @@
                 <nav class="nav-links">
                     <a href="#about" class="nav-item active" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-user"></i> <span data-i18n="nav_about">About</span></a>
                     <a href="#education" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-graduation-cap"></i> <span data-i18n="nav_edu">Education</span></a>
+                    <a href="#experience" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-briefcase"></i> <span data-i18n="nav_exp">Experience</span></a>
                     <a href="#projects" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-code-branch"></i> <span data-i18n="nav_proj">Projects</span></a>
                     <a href="#awards" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-trophy"></i> <span data-i18n="nav_award">Awards</span></a>
                     <a href="#skills" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-tools"></i> <span data-i18n="nav_skill">Skills</span></a>
@@ -295,9 +304,12 @@
                 <h2 class="section-title" data-i18n="edu_title">Education</h2>
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title school-title">
-                            <img class="school-logo" src="assets/zju-emblem.svg" alt="Zhejiang University logo" loading="lazy">
-                            <span data-i18n="zju_name">Zhejiang University</span>
+                        <div class="card-title">
+                            <a class="school-title" href="https://www.zju.edu.cn/" target="_blank" rel="noopener noreferrer">
+                                <img class="school-logo" src="assets/zju-emblem.svg" alt="Zhejiang University logo" loading="lazy">
+                                <span data-i18n="zju_name">Zhejiang University</span>
+                                <i class="fas fa-external-link-alt" style="font-size:0.75rem;"></i>
+                            </a>
                         </div>
                         <div class="card-meta">2026.9 - <span data-i18n="present">Present</span></div>
                     </div>
@@ -311,9 +323,12 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title school-title">
-                            <img class="school-logo" src="assets/jlu-emblem.svg" alt="Jilin University logo" loading="lazy">
-                            <span data-i18n="uni_name">Jilin University</span>
+                        <div class="card-title">
+                            <a class="school-title" href="https://www.jlu.edu.cn/" target="_blank" rel="noopener noreferrer">
+                                <img class="school-logo" src="assets/jlu-emblem.svg" alt="Jilin University logo" loading="lazy">
+                                <span data-i18n="uni_name">Jilin University</span>
+                                <i class="fas fa-external-link-alt" style="font-size:0.75rem;"></i>
+                            </a>
                         </div>
                         <div class="card-meta">2022.9 - 2026.6</div>
                     </div>
@@ -326,13 +341,40 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title school-title">
-                            <img class="school-logo" src="assets/jlu-emblem.svg" alt="Jilin University logo" loading="lazy">
-                            <span data-i18n="uni_name">Jilin University</span>
+                        <div class="card-title">
+                            <a class="school-title" href="https://www.jlu.edu.cn/" target="_blank" rel="noopener noreferrer">
+                                <img class="school-logo" src="assets/jlu-emblem.svg" alt="Jilin University logo" loading="lazy">
+                                <span data-i18n="uni_name">Jilin University</span>
+                                <i class="fas fa-external-link-alt" style="font-size:0.75rem;"></i>
+                            </a>
                         </div>
                         <div class="card-meta">2023.9 - 2025.6</div>
                     </div>
                     <p data-i18n="major_2">Minor in Computer Science and Technology, School of Computer Science and Technology.</p>
+                </div>
+            </section>
+
+            <section id="experience" class="section">
+                <h2 class="section-title" data-i18n="exp_title">Internship Experience</h2>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <a class="school-title" href="https://ia.cas.cn/" target="_blank" rel="noopener noreferrer">
+                                <img class="school-logo" src="assets/casia-emblem.svg" alt="CASIA logo" loading="lazy">
+                                <span data-i18n="casia_name">Institute of Automation, Chinese Academy of Sciences</span>
+                                <i class="fas fa-external-link-alt" style="font-size:0.75rem;"></i>
+                            </a>
+                        </div>
+                        <div class="card-meta">2026.1 - 2026.6</div>
+                    </div>
+                    <p style="font-weight:600; margin-bottom:10px;" data-i18n="casia_role">Intern</p>
+                    <p style="font-size:0.95rem; color:#555;" data-i18n="casia_desc">Internship project: PiStar, a closed-loop robot learning framework for data collection, value labeling, and policy fine-tuning across simulation and physical robot platforms.</p>
+                    <div class="tags">
+                        <a class="tag" href="https://github.com/ybpy/pistar" target="_blank" rel="noopener noreferrer">PiStar <i class="fas fa-external-link-alt" style="font-size:0.65rem;"></i></a>
+                        <span class="tag">Robot Learning</span>
+                        <span class="tag">VLA</span>
+                        <span class="tag">VLM</span>
+                    </div>
                 </div>
             </section>
 
@@ -451,11 +493,12 @@
         const i18n = {
             zh: {
                 name: "王宇琛", addr1: "长春市南关区人民大街5988号吉林大学南岭校区", addr2: "杭州市余杭塘路866号浙江大学紫金港校区",
-                nav_about: "个人简介", nav_edu: "教育背景", nav_proj: "科研项目", nav_award: "荣誉奖项", nav_skill: "技术栈",
+                nav_about: "个人简介", nav_edu: "教育背景", nav_exp: "实习经历", nav_proj: "科研项目", nav_award: "荣誉奖项", nav_skill: "技术栈",
                 switch_layout: "切换布局", about_title: "个人评价",
                 about_text: "对数学、计算机科学及智能领域感兴趣，具备智能制造工程与计算机科学交叉背景。当前关注 AI4S、计算机视觉、VLM、VLA 与工业 Agent。",
                 edu_title: "教育经历", zju_name: "浙江大学", zju_degree: "机械工程硕士，设计工程所；推免攻读硕士。", uni_name: "吉林大学", present: "至今",
                 major_1: "智能制造工程（本科主修）| 机械与航空航天工程学院", major_2: "计算机科学与技术（本科辅修）| 计算机科学与技术学院",
+                exp_title: "实习经历", casia_name: "中国科学院自动化研究所", casia_role: "实习生", casia_desc: "实习项目：PiStar，面向仿真与真实机器人平台的闭环机器人学习框架，涵盖数据采集、价值标注与策略微调。",
                 proj_title: "科研与项目",
                 proj_1_name: "基于零样本的工业瑕疵检测", proj_1_desc: "负责文献检索、模型设计与代码实现，围绕小样本、多品类瑕疵检测开展零样本学习与多模态融合研究；基于 AnoVL/AnoCLIP+ 进行提示词模板与适配器优化，相关发明专利在投并已通过第一阶段审查。",
                 proj_2_name: "一种基于振动信号的轴承故障诊断模型", proj_2_desc: "科研训练作品，围绕振动信号开展轴承故障诊断模型实践。",
@@ -466,11 +509,12 @@
             },
             en: {
                 name: "Wang Yuchen", addr1: "Jilin University Nanling Campus, 5988 Renmin Street, Nanguan District, Changchun", addr2: "Zhejiang University Zijingang Campus, 866 Yuhangtang Road, Hangzhou",
-                nav_about: "About", nav_edu: "Education", nav_proj: "Projects", nav_award: "Awards", nav_skill: "Skills",
+                nav_about: "About", nav_edu: "Education", nav_exp: "Experience", nav_proj: "Projects", nav_award: "Awards", nav_skill: "Skills",
                 switch_layout: "Layout", about_title: "About Me",
                 about_text: "I am interested in mathematics, computer science, and intelligent systems, with an interdisciplinary background in intelligent manufacturing and computer science. My current interests include AI4S, computer vision, VLM, VLA, and industrial agents.",
                 edu_title: "Education", zju_name: "Zhejiang University", zju_degree: "M.Eng. in Mechanical Engineering, Institute of Design Engineering; recommended admission with exam exemption.", uni_name: "Jilin University", present: "Present",
                 major_1: "B.S. in Intelligent Manufacturing Engineering, School of Mechanical and Aerospace Engineering.", major_2: "Minor in Computer Science and Technology, School of Computer Science and Technology.",
+                exp_title: "Internship Experience", casia_name: "Institute of Automation, Chinese Academy of Sciences", casia_role: "Intern", casia_desc: "Internship project: PiStar, a closed-loop robot learning framework for data collection, value labeling, and policy fine-tuning across simulation and physical robot platforms.",
                 proj_title: "Research & Projects", proj_1_name: "Zero-Shot Industrial Defect Detection", proj_1_desc: "Led literature review, model design, and implementation for zero-shot defect detection. The work builds on AnoVL/AnoCLIP+ with prompt templates and adapter-based optimization; one related invention patent application has passed first-stage review.",
                 proj_2_name: "Bearing Fault Diagnosis Based on Vibration Signals", proj_2_desc: "A research training portfolio project on bearing fault diagnosis using vibration signals.",
                 award_title: "Honors & Awards", award_1: "First Prize, 25th China Undergraduate Mathematics Competition, Jilin Province", award_2: "First Prize, 2024 China Undergraduate Mathematical Contest in Modeling, Jilin Province",
