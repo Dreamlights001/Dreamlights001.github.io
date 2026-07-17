@@ -70,7 +70,7 @@
 
         .sb-top { text-align: center; flex-shrink: 0; }
         .avatar { width: 100px; height: 100px; border-radius: 50%; background: #eee; margin: 0 auto 15px; overflow: hidden; border: 3px solid var(--accent-color); }
-        .avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; transform: scale(4.5); transform-origin: 50% 52%; }
         .name { font-size: 1.4rem; font-weight: 700; margin-bottom: 5px; }
         
         /* 统计区域 */
@@ -142,6 +142,13 @@
         .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
         .tag { padding: 4px 12px; background: #f0f2f5; color: var(--text-main); border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
 
+        .about-details { min-width: 0; }
+        .about-summary { line-height: 1.8; color: #555; margin-bottom: 24px; }
+        .about-skills { padding-top: 20px; border-top: 1px solid #e4e8ed; }
+        .about-subtitle { font-size: 1.05rem; margin-bottom: 16px; }
+        .about-skill-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+        .about-skill-group h4 { font-size: 0.9rem; color: var(--text-sub); margin-bottom: 10px; }
+
         /* Top Nav Elements */
         .top-nav-bar { display: none; }
         .main-header-info { display: none; }
@@ -180,6 +187,7 @@
             .mobile-toggle { display: block; }
             .card-header { flex-wrap: wrap; }
             .card-meta { text-align: left; }
+            .about-skill-groups { grid-template-columns: 1fr; gap: 20px; }
             body.layout-top-nav .top-nav-bar { display: none; } 
         }
 
@@ -225,7 +233,7 @@
         <aside class="sidebar">
             <div class="sb-top">
                 <div class="avatar">
-                    <img src="https://ui-avatars.com/api/?name=Wang+Yuchen&background=3498db&color=fff&size=200" alt="Avatar">
+                    <img src="assets/YC_W.jpg" alt="Portrait of Wang Yuchen">
                 </div>
                 <div class="name" data-i18n="name">Wang Yuchen</div>
                 
@@ -252,7 +260,6 @@
                     <a href="#experience" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-briefcase"></i> <span data-i18n="nav_exp">Experience</span></a>
                     <a href="#projects" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-code-branch"></i> <span data-i18n="nav_proj">Projects</span></a>
                     <a href="#awards" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-trophy"></i> <span data-i18n="nav_award">Awards</span></a>
-                    <a href="#skills" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-tools"></i> <span data-i18n="nav_skill">Skills</span></a>
                 </nav>
             </div>
 
@@ -263,6 +270,7 @@
                     <a href="mailto:16627863893@163.com" class="contact-btn"><i class="fas fa-envelope"></i></a>
                     <a href="https://github.com/Dreamlights001/" target="_blank" rel="noopener noreferrer" class="contact-btn"><i class="fab fa-github"></i></a>
                     <a href="https://orcid.org/0009-0001-4442-6068" target="_blank" rel="noopener noreferrer" class="contact-btn" aria-label="ORCID"><i class="fab fa-orcid"></i></a>
+                    <a href="https://www.linkedin.com/in/%E5%AE%87%E7%90%9B-%E7%8E%8B-0a6aa6391/" target="_blank" rel="noopener noreferrer" class="contact-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <button class="toggle-btn-rect" onclick="toggleLayout()">
                     <i class="fas fa-exchange-alt"></i> <span data-i18n="switch_layout">Layout</span>
@@ -295,9 +303,48 @@
 
             <section id="about" class="section">
                 <h2 class="section-title" data-i18n="about_title">About Me</h2>
-                <p style="line-height: 1.8; color: #555;" data-i18n="about_text">
-                    I am interested in mathematics, computer science, and intelligent systems, with an interdisciplinary background in intelligent manufacturing and computer science. My current interests include AI4S, computer vision, VLM, VLA, and industrial agents.
-                </p>
+                <div class="about-details">
+                    <p class="about-summary" data-i18n="about_text">
+                        I am interested in mathematics, computer science, and intelligent systems, with an interdisciplinary background in intelligent manufacturing and computer science. My current interests include AI4S, computer vision, VLM, VLA, and industrial agents.
+                    </p>
+                    <div class="about-skills">
+                        <h3 class="about-subtitle" data-i18n="skill_title">Skills</h3>
+                        <div class="about-skill-groups">
+                            <div class="about-skill-group">
+                                <h4 data-i18n="skill_group_1">Languages & AI</h4>
+                                <div class="tags">
+                                    <span class="tag">Python</span>
+                                    <span class="tag">C/C++</span>
+                                    <span class="tag">MATLAB</span>
+                                    <span class="tag">PyTorch</span>
+                                    <span class="tag">TensorFlow</span>
+                                    <span class="tag">Transformer</span>
+                                    <span class="tag">CLIP</span>
+                                    <span class="tag">SAM</span>
+                                    <span class="tag">VLM</span>
+                                    <span class="tag">VLA</span>
+                                    <span class="tag">Agentic AI</span>
+                                </div>
+                            </div>
+                            <div class="about-skill-group">
+                                <h4 data-i18n="skill_group_2">Engineering & Tools</h4>
+                                <div class="tags">
+                                    <span class="tag">SolidWorks</span>
+                                    <span class="tag">CATIA</span>
+                                    <span class="tag">CAD</span>
+                                    <span class="tag">PLC</span>
+                                    <span class="tag">LabVIEW</span>
+                                    <span class="tag">Comsol</span>
+                                    <span class="tag">Simulink</span>
+                                    <span class="tag">Mujoco</span>
+                                    <span class="tag">ROS 2</span>
+                                    <span class="tag">Git</span>
+                                    <span class="tag">Docker</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <section id="education" class="section">
@@ -334,7 +381,8 @@
                     </div>
                     <p data-i18n="major_1">B.S. in Intelligent Manufacturing Engineering, School of Mechanical and Aerospace Engineering.</p>
                     <div class="tags" style="margin-top:10px;">
-                        <span class="tag">GPA 86.0</span>
+                        <span class="tag">Average 86.3</span>
+                        <span class="tag">GPA 3.41/4</span>
                         <span class="tag">Rank 9/30</span>
                         <span class="tag">CET-6 480</span>
                     </div>
@@ -368,10 +416,12 @@
                         <div class="card-meta">2026.1 - 2026.6</div>
                     </div>
                     <p style="font-weight:600; margin-bottom:10px;" data-i18n="casia_role">Intern</p>
-                    <p style="font-size:0.95rem; color:#555;" data-i18n="casia_desc">Internship project: PiStar, a closed-loop robot learning framework for data collection, value labeling, and policy fine-tuning across simulation and physical robot platforms.</p>
+                    <p style="font-size:0.95rem; color:#555;" data-i18n="casia_desc">Internship work centered on PiStar, a closed-loop robot learning framework. Built a LIBERO workflow spanning demonstration-data conversion to the LeRobot format, policy training and rollout collection, VLM-based value modeling and advantage labeling, and iterative policy fine-tuning; the framework also supports Piper and RealMan physical robot platforms.</p>
                     <div class="tags">
                         <a class="tag" href="https://github.com/ybpy/pistar" target="_blank" rel="noopener noreferrer">PiStar <i class="fas fa-external-link-alt" style="font-size:0.65rem;"></i></a>
                         <span class="tag">Robot Learning</span>
+                        <span class="tag">LIBERO</span>
+                        <span class="tag">LeRobot</span>
                         <span class="tag">VLA</span>
                         <span class="tag">VLM</span>
                     </div>
@@ -446,44 +496,13 @@
                 </div>
             </section>
 
-            <section id="skills" class="section">
-                <h2 class="section-title" data-i18n="skill_title">Skills</h2>
-                <div class="card">
-                    <h4 style="margin-bottom:10px;" data-i18n="skill_group_1">Languages & AI</h4>
-                    <div class="tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">C/C++</span>
-                        <span class="tag">MATLAB</span>
-                        <span class="tag">PyTorch</span>
-                        <span class="tag">TensorFlow</span>
-                        <span class="tag">Transformer</span>
-                        <span class="tag">CLIP</span>
-                        <span class="tag">SAM</span>
-                        <span class="tag">VLM</span>
-                        <span class="tag">VLA</span>
-                        <span class="tag">LLM API</span>
-                    </div>
-                    <h4 style="margin-top:20px; margin-bottom:10px;" data-i18n="skill_group_2">Engineering & Tools</h4>
-                    <div class="tags">
-                        <span class="tag">SolidWorks</span>
-                        <span class="tag">CATIA</span>
-                        <span class="tag">CAD</span>
-                        <span class="tag">PLC</span>
-                        <span class="tag">LabVIEW</span>
-                        <span class="tag">Comsol</span>
-                        <span class="tag">Simulink</span>
-                        <span class="tag">Mujoco</span>
-                        <span class="tag">Git</span>
-                    </div>
-                </div>
-            </section>
-
             <div class="footer-contacts">
                 <a href="tencent://message/?uin=3407844687" class="contact-btn"><i class="fab fa-qq"></i> <span style="margin-left:8px;">QQ</span></a>
                 <a href="#" onclick="showWeChat(event)" class="contact-btn"><i class="fab fa-weixin"></i> <span style="margin-left:8px;">WeChat</span></a>
                 <a href="mailto:16627863893@163.com" class="contact-btn"><i class="fas fa-envelope"></i> <span style="margin-left:8px;">Email</span></a>
                 <a href="https://github.com/Dreamlights001/" target="_blank" rel="noopener noreferrer" class="contact-btn"><i class="fab fa-github"></i> <span style="margin-left:8px;">GitHub</span></a>
                 <a href="https://orcid.org/0009-0001-4442-6068" target="_blank" rel="noopener noreferrer" class="contact-btn"><i class="fab fa-orcid"></i> <span style="margin-left:8px;">ORCID</span></a>
+                <a href="https://www.linkedin.com/in/%E5%AE%87%E7%90%9B-%E7%8E%8B-0a6aa6391/" target="_blank" rel="noopener noreferrer" class="contact-btn"><i class="fab fa-linkedin-in"></i> <span style="margin-left:8px;">LinkedIn</span></a>
             </div>
             <div style="height: 50px;"></div>
         </main>
@@ -493,12 +512,12 @@
         const i18n = {
             zh: {
                 name: "王宇琛", addr1: "长春市南关区人民大街5988号吉林大学南岭校区", addr2: "杭州市余杭塘路866号浙江大学紫金港校区",
-                nav_about: "个人简介", nav_edu: "教育背景", nav_exp: "实习经历", nav_proj: "科研项目", nav_award: "荣誉奖项", nav_skill: "技术栈",
+                nav_about: "个人简介", nav_edu: "教育背景", nav_exp: "实习经历", nav_proj: "科研项目", nav_award: "荣誉奖项",
                 switch_layout: "切换布局", about_title: "个人评价",
                 about_text: "对数学、计算机科学及智能领域感兴趣，具备智能制造工程与计算机科学交叉背景。当前关注 AI4S、计算机视觉、VLM、VLA 与工业 Agent。",
                 edu_title: "教育经历", zju_name: "浙江大学", zju_degree: "机械工程硕士，设计工程所；推免攻读硕士。", uni_name: "吉林大学", present: "至今",
                 major_1: "智能制造工程（本科主修）| 机械与航空航天工程学院", major_2: "计算机科学与技术（本科辅修）| 计算机科学与技术学院",
-                exp_title: "实习经历", casia_name: "中国科学院自动化研究所", casia_role: "实习生", casia_desc: "实习项目：PiStar，面向仿真与真实机器人平台的闭环机器人学习框架，涵盖数据采集、价值标注与策略微调。",
+                exp_title: "实习经历", casia_name: "中国科学院自动化研究所", casia_role: "实习生", casia_desc: "实习工作围绕闭环机器人学习框架 PiStar 展开：在 LIBERO 仿真环境中完成示范数据的 LeRobot 格式转换、策略训练与 rollout 数据采集、基于 VLM 的价值建模与优势标注，以及策略迭代微调；框架同时支持 Piper 与 RealMan 等真实机器人平台。",
                 proj_title: "科研与项目",
                 proj_1_name: "基于零样本的工业瑕疵检测", proj_1_desc: "负责文献检索、模型设计与代码实现，围绕小样本、多品类瑕疵检测开展零样本学习与多模态融合研究；基于 AnoVL/AnoCLIP+ 进行提示词模板与适配器优化，相关发明专利在投并已通过第一阶段审查。",
                 proj_2_name: "一种基于振动信号的轴承故障诊断模型", proj_2_desc: "科研训练作品，围绕振动信号开展轴承故障诊断模型实践。",
@@ -509,12 +528,12 @@
             },
             en: {
                 name: "Wang Yuchen", addr1: "Jilin University Nanling Campus, 5988 Renmin Street, Nanguan District, Changchun", addr2: "Zhejiang University Zijingang Campus, 866 Yuhangtang Road, Hangzhou",
-                nav_about: "About", nav_edu: "Education", nav_exp: "Experience", nav_proj: "Projects", nav_award: "Awards", nav_skill: "Skills",
+                nav_about: "About", nav_edu: "Education", nav_exp: "Experience", nav_proj: "Projects", nav_award: "Awards",
                 switch_layout: "Layout", about_title: "About Me",
                 about_text: "I am interested in mathematics, computer science, and intelligent systems, with an interdisciplinary background in intelligent manufacturing and computer science. My current interests include AI4S, computer vision, VLM, VLA, and industrial agents.",
                 edu_title: "Education", zju_name: "Zhejiang University", zju_degree: "M.Eng. in Mechanical Engineering, Institute of Design Engineering; recommended admission with exam exemption.", uni_name: "Jilin University", present: "Present",
                 major_1: "B.S. in Intelligent Manufacturing Engineering, School of Mechanical and Aerospace Engineering.", major_2: "Minor in Computer Science and Technology, School of Computer Science and Technology.",
-                exp_title: "Internship Experience", casia_name: "Institute of Automation, Chinese Academy of Sciences", casia_role: "Intern", casia_desc: "Internship project: PiStar, a closed-loop robot learning framework for data collection, value labeling, and policy fine-tuning across simulation and physical robot platforms.",
+                exp_title: "Internship Experience", casia_name: "Institute of Automation, Chinese Academy of Sciences", casia_role: "Intern", casia_desc: "Internship work centered on PiStar, a closed-loop robot learning framework. Built a LIBERO workflow spanning demonstration-data conversion to the LeRobot format, policy training and rollout collection, VLM-based value modeling and advantage labeling, and iterative policy fine-tuning; the framework also supports Piper and RealMan physical robot platforms.",
                 proj_title: "Research & Projects", proj_1_name: "Zero-Shot Industrial Defect Detection", proj_1_desc: "Led literature review, model design, and implementation for zero-shot defect detection. The work builds on AnoVL/AnoCLIP+ with prompt templates and adapter-based optimization; one related invention patent application has passed first-stage review.",
                 proj_2_name: "Bearing Fault Diagnosis Based on Vibration Signals", proj_2_desc: "A research training portfolio project on bearing fault diagnosis using vibration signals.",
                 award_title: "Honors & Awards", award_1: "First Prize, 25th China Undergraduate Mathematics Competition, Jilin Province", award_2: "First Prize, 2024 China Undergraduate Mathematical Contest in Modeling, Jilin Province",
