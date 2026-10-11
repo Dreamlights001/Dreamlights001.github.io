@@ -35,6 +35,17 @@ export const resumeData = {
   ],
   research: [
     {
+      "title": "RoboParty · INTACT2Real & Benchmark Generation",
+      "role": "World Models / Dual-Arm Manipulation / Benchmark Generation",
+      "desc": "Participated in INTACT and built INTACT2Real, a JEPA-WAM sim-to-real system for dual-arm manipulation using RoboTwin 2.0 and PiPER. Responsible for RoboParty's benchmark generation project. Built agents to automatically generate high-fidelity robot training environments, verify the usability of scenes and tasks end to end, and align simulation scenes with real physical settings."
+    },
+    {
+      "title": "Institute of Automation, Chinese Academy of Sciences · PiStar",
+      "role": "PiStar · Closed-Loop Robot Learning",
+      "desc": "Worked on PiStar, a closed-loop robot learning framework. Built a LIBERO workflow spanning demonstration-data conversion to the LeRobot format, policy training and rollout collection, VLM-based value modeling and advantage labeling, and iterative policy fine-tuning; the framework also supports Piper and RealMan physical robot platforms."
+    },
+
+    {
       title: "Zero-Shot Industrial Defect Detection",
       role: "Lead Researcher",
       desc: "Led development of a general defect detection model fusing visual and text features. Improved AnoVL framework with residual adapters. One patent pending."

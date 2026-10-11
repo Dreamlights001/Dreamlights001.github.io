@@ -202,7 +202,7 @@
         <div class="top-menu">
             <a href="#about" class="nav-item" data-i18n="nav_about">About</a>
             <a href="#education" class="nav-item" data-i18n="nav_edu">Education</a>
-            <a href="#projects" class="nav-item" data-i18n="nav_proj">Projects</a>
+            <a href="#projects" class="nav-item" data-i18n="nav_proj">Research & Projects</a>
             <a href="#awards" class="nav-item" data-i18n="nav_award">Awards</a>
         </div>
         <div class="top-actions">
@@ -241,7 +241,7 @@
                 <nav class="nav-links">
                     <a href="#about" class="nav-item active" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-user"></i> <span data-i18n="nav_about">About</span></a>
                     <a href="#education" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-graduation-cap"></i> <span data-i18n="nav_edu">Education</span></a>
-                    <a href="#projects" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-code-branch"></i> <span data-i18n="nav_proj">Projects</span></a>
+                    <a href="#projects" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-code-branch"></i> <span data-i18n="nav_proj">Research & Projects</span></a>
                     <a href="#awards" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-trophy"></i> <span data-i18n="nav_award">Awards</span></a>
                     <a href="#skills" class="nav-item" onclick="setActive(this); closeMobileMenu();"><i class="fas fa-tools"></i> <span data-i18n="nav_skill">Skills</span></a>
                 </nav>
@@ -338,6 +338,45 @@
 
             <section id="projects" class="section">
                 <h2 class="section-title" data-i18n="proj_title">Research & Projects</h2>
+                <div class="card" id="roboparty-project">
+                    <div class="card-header">
+                        <div class="card-title" data-i18n="roboparty_name">RoboParty</div>
+                        <div class="card-meta" data-i18n="roboparty_focus">World Models / Dual-Arm Manipulation / Benchmark Generation</div>
+                    </div>
+                    <p style="margin-bottom:10px; font-size:0.95rem; color:#555;" data-i18n="roboparty_intact">Participated in INTACT and built INTACT2Real, a JEPA-WAM sim-to-real system for dual-arm manipulation using RoboTwin 2.0 and PiPER.</p>
+                    <p style="margin-bottom:10px; font-size:0.95rem; color:#555;" data-i18n="roboparty_generation">Responsible for RoboParty's benchmark generation project. Built agents to automatically generate high-fidelity robot training environments, verify the usability of scenes and tasks end to end, and align simulation scenes with real physical settings.</p>
+                    <div class="tags">
+                        <a class="tag" href="https://github.com/zju3dv/INTACT-JEPA" target="_blank" rel="noopener noreferrer">INTACT-JEPA <i class="fas fa-external-link-alt" style="font-size:0.65rem;"></i></a>
+                        <span class="tag">INTACT2Real</span>
+                        <span class="tag">JEPA-WAM</span>
+                        <span class="tag">Sim2Real</span>
+                        <span class="tag">RoboTwin 2.0</span>
+                        <span class="tag">PiPER</span>
+                        <span class="tag">Agent</span>
+                    </div>
+                </div>
+                <div class="card" id="casia-project">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <a class="school-title" href="https://ia.cas.cn/" target="_blank" rel="noopener noreferrer">
+                                <img class="school-logo" src="../assets/casia-emblem.svg" alt="CASIA logo" loading="lazy">
+                                <span data-i18n="casia_name">Institute of Automation, Chinese Academy of Sciences</span>
+                                <i class="fas fa-external-link-alt" style="font-size:0.75rem;"></i>
+                            </a>
+                        </div>
+                        <div class="card-meta">2026.1 - 2026.6</div>
+                    </div>
+                    <p style="font-weight:600; margin-bottom:10px;" data-i18n="casia_role">PiStar · Closed-Loop Robot Learning</p>
+                    <p style="font-size:0.95rem; color:#555;" data-i18n="casia_desc">Worked on PiStar, a closed-loop robot learning framework. Built a LIBERO workflow spanning demonstration-data conversion to the LeRobot format, policy training and rollout collection, VLM-based value modeling and advantage labeling, and iterative policy fine-tuning; the framework also supports Piper and RealMan physical robot platforms.</p>
+                    <div class="tags">
+                        <a class="tag" href="https://github.com/ybpy/pistar" target="_blank" rel="noopener noreferrer">PiStar <i class="fas fa-external-link-alt" style="font-size:0.65rem;"></i></a>
+                        <span class="tag">Robot Learning</span>
+                        <span class="tag">LIBERO</span>
+                        <span class="tag">LeRobot</span>
+                        <span class="tag">VLA</span>
+                        <span class="tag">VLM</span>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
@@ -357,19 +396,7 @@
                         <span class="tag">CLIP</span>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <a href="https://github.com/Dreamlights001/Bearing-CLIP" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; gap:10px;">
-                                <span data-i18n="proj_2_name">Bearing Fault Diagnosis Based on Vibration Signals</span> <i class="fas fa-external-link-alt" style="font-size:0.8rem;"></i>
-                            </a>
-                        </div>
-                        <div class="card-meta">Research Training / Fault Diagnosis</div>
-                    </div>
-                    <p style="margin-bottom:10px; font-size:0.95rem; color:#555;" data-i18n="proj_2_desc">
-                        A research training portfolio project on bearing fault diagnosis using vibration signals.
-                    </p>
-                </div>
+
             </section>
 
             <section id="awards" class="section">
@@ -450,29 +477,29 @@
     <script>
         const i18n = {
             zh: {
+                roboparty_name: "RoboParty", roboparty_focus: "世界模型 / 双臂操作 / Benchmark 生成", roboparty_intact: "参与 INTACT 项目，构建 INTACT2Real：基于 JEPA-WAM 的双臂操作 Sim2Real 系统，使用 RoboTwin 2.0 与 PiPER 平台。", roboparty_generation: "负责 RoboParty 自研 Benchmark 生成项目，构建自动生成高保真机器人训练环境的 Agent，实现从场景与任务自动生成到可用性验证的端到端流程，并对齐高保真仿真场景与真实物理场景。", casia_role: "PiStar · 闭环机器人学习", casia_desc: "围绕闭环机器人学习框架 PiStar，在 LIBERO 仿真环境中完成示范数据的 LeRobot 格式转换、策略训练与 rollout 数据采集、基于 VLM 的价值建模与优势标注，以及策略迭代微调；框架同时支持 Piper 与 RealMan 等真实机器人平台。", casia_name: "中国科学院自动化研究所",
                 name: "王宇琛", addr1: "长春市南关区人民大街5988号吉林大学南岭校区", addr2: "杭州市余杭塘路866号浙江大学紫金港校区",
-                nav_about: "个人简介", nav_edu: "教育背景", nav_proj: "科研项目", nav_award: "荣誉奖项", nav_skill: "技术栈",
+                nav_about: "个人简介", nav_edu: "教育背景", nav_proj: "研究与项目", nav_award: "荣誉奖项", nav_skill: "技术栈",
                 switch_layout: "切换布局", about_title: "个人评价",
                 about_text: "对数学、计算机科学及智能领域感兴趣，具备智能制造工程与计算机科学交叉背景。当前关注 AI4S、计算机视觉、VLM、VLA 与工业 Agent。",
                 edu_title: "教育经历", zju_name: "浙江大学", zju_degree: "机械工程硕士，设计工程所；推免攻读硕士。", uni_name: "吉林大学", present: "至今",
                 major_1: "智能制造工程（本科主修）| 机械与航空航天工程学院", major_2: "计算机科学与技术（本科辅修）| 计算机科学与技术学院",
-                proj_title: "科研与项目",
+                proj_title: "研究与项目",
                 proj_1_name: "基于零样本的工业瑕疵检测", proj_1_desc: "负责文献检索、模型设计与代码实现，围绕小样本、多品类瑕疵检测开展零样本学习与多模态融合研究；基于 AnoVL/AnoCLIP+ 进行提示词模板与适配器优化，相关发明专利在投并已通过第一阶段审查。",
-                proj_2_name: "一种基于振动信号的轴承故障诊断模型", proj_2_desc: "科研训练作品，围绕振动信号开展轴承故障诊断模型实践。",
                 award_title: "获奖荣誉", award_1: "第25届中国大学生数学竞赛吉林省一等奖", award_2: "2024届中国大学生数学建模竞赛吉林省一等奖",
                 award_3: "2025美国大学生数学建模竞赛H奖", award_4: "2025高校计算机设计大赛吉林省一等奖", award_5: "第九届中国数据新闻大赛全国一等奖",
                 award_6: "2025全国大学生市场调查与分析大赛全国二等奖", award_7: "2025蓝桥杯Python程序设计软件赛吉林省三等奖", award_8: "2024吉林大学大学生物理竞赛校二等奖",
                 skill_title: "技术栈", skill_group_1: "编程与 AI", skill_group_2: "工程与工具"
             },
             en: {
+                roboparty_name: "RoboParty", roboparty_focus: "World Models / Dual-Arm Manipulation / Benchmark Generation", roboparty_intact: "Participated in INTACT and built INTACT2Real, a JEPA-WAM sim-to-real system for dual-arm manipulation using RoboTwin 2.0 and PiPER.", roboparty_generation: "Responsible for RoboParty's benchmark generation project. Built agents to automatically generate high-fidelity robot training environments, verify the usability of scenes and tasks end to end, and align simulation scenes with real physical settings.", casia_role: "PiStar · Closed-Loop Robot Learning", casia_desc: "Worked on PiStar, a closed-loop robot learning framework. Built a LIBERO workflow spanning demonstration-data conversion to the LeRobot format, policy training and rollout collection, VLM-based value modeling and advantage labeling, and iterative policy fine-tuning; the framework also supports Piper and RealMan physical robot platforms.", casia_name: "Institute of Automation, Chinese Academy of Sciences",
                 name: "Wang Yuchen", addr1: "Jilin University Nanling Campus, 5988 Renmin Street, Nanguan District, Changchun", addr2: "Zhejiang University Zijingang Campus, 866 Yuhangtang Road, Hangzhou",
-                nav_about: "About", nav_edu: "Education", nav_proj: "Projects", nav_award: "Awards", nav_skill: "Skills",
+                nav_about: "About", nav_edu: "Education", nav_proj: "Research & Projects", nav_award: "Awards", nav_skill: "Skills",
                 switch_layout: "Layout", about_title: "About Me",
                 about_text: "I am interested in mathematics, computer science, and intelligent systems, with an interdisciplinary background in intelligent manufacturing and computer science. My current interests include AI4S, computer vision, VLM, VLA, and industrial agents.",
                 edu_title: "Education", zju_name: "Zhejiang University", zju_degree: "M.Eng. in Mechanical Engineering, Institute of Design Engineering; recommended admission with exam exemption.", uni_name: "Jilin University", present: "Present",
                 major_1: "B.S. in Intelligent Manufacturing Engineering, School of Mechanical and Aerospace Engineering.", major_2: "Minor in Computer Science and Technology, School of Computer Science and Technology.",
                 proj_title: "Research & Projects", proj_1_name: "Zero-Shot Industrial Defect Detection", proj_1_desc: "Led literature review, model design, and implementation for zero-shot defect detection. The work builds on AnoVL/AnoCLIP+ with prompt templates and adapter-based optimization; one related invention patent application has passed first-stage review.",
-                proj_2_name: "Bearing Fault Diagnosis Based on Vibration Signals", proj_2_desc: "A research training portfolio project on bearing fault diagnosis using vibration signals.",
                 award_title: "Honors & Awards", award_1: "First Prize, 25th China Undergraduate Mathematics Competition, Jilin Province", award_2: "First Prize, 2024 China Undergraduate Mathematical Contest in Modeling, Jilin Province",
                 award_3: "Honorable Mention, 2025 Mathematical Contest in Modeling", award_4: "First Prize, 2025 China Collegiate Computing Design Competition, Jilin Province", award_5: "National First Prize, 9th China Data Journalism Competition",
                 award_6: "National Second Prize, 2025 Market Research and Analysis Competition", award_7: "Third Prize, 2025 Lanqiao Cup Python Programming Contest, Jilin Province", award_8: "Second Prize, 2024 Jilin University Physics Competition",
