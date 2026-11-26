@@ -6,7 +6,6 @@
     <title>Wang Yuchen | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
     
     <style>
         :root {
@@ -735,19 +734,38 @@
             if(target) observer.observe(target, config);
         });
 
-        const LIKE_WORKSPACE = 'dreamlights001-github-io';
-        const LIKE_COUNTER_NAME = 'resume-likes';
+        const LIKE_API_BASE = 'https://likes.dreamlights.us.ci';
         const LIKE_CACHE_KEY = 'resume_like_count';
         const LIKE_FLAG_KEY = 'resume_has_liked';
-        let likeCounter = null;
         let hasLiked = false;
         let likeRequestPending = false;
 
-        function getLikeCounter() {
-            if (likeCounter) return likeCounter;
-            if (!window.Counter) return null;
-            likeCounter = new window.Counter({ workspace: LIKE_WORKSPACE });
-            return likeCounter;
+        async function fetchLikeCount() {
+            const resp = await fetch(`${LIKE_API_BASE}/likes`, {
+                method: 'GET',
+                cache: 'no-store'
+            });
+            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+            const data = await resp.json();
+            const count = Number(data.value);
+            if (!Number.isFinite(count) || count < 0) {
+                throw new Error('Invalid like count response');
+            }
+            return count;
+        }
+
+        async function incrementLikeCount() {
+            const resp = await fetch(`${LIKE_API_BASE}/likes/up`, {
+                method: 'POST',
+                cache: 'no-store'
+            });
+            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+            const data = await resp.json();
+            const count = Number(data.value);
+            if (!Number.isFinite(count) || count < 0) {
+                throw new Error('Invalid like count response');
+            }
+            return count;
         }
 
         function getCachedLikeCount() {
@@ -785,13 +803,8 @@
             syncLikeCount(getCachedLikeCount());
             setLikedState(hasLiked);
 
-            const counter = getLikeCounter();
-            if (!counter) return;
-
-            counter.get(LIKE_COUNTER_NAME)
-                .then(result => {
-                    const count = Number(result.value);
-                    if (!Number.isFinite(count) || count < 0) return;
+            fetchLikeCount()
+                .then(count => {
                     cacheLikeCount(count);
                     syncLikeCount(count);
                 })
@@ -808,22 +821,11 @@
 
             if (likeRequestPending) return;
 
-            const counter = getLikeCounter();
-            if (!counter) {
-                alert(currentLang === 'zh' ? "点赞服务暂时不可用，请稍后再试。" : "Like service is temporarily unavailable. Please try again later.");
-                return;
-            }
-
             likeRequestPending = true;
             setLikeButtonsDisabled(true);
 
-            counter.up(LIKE_COUNTER_NAME)
-                .then(result => {
-                    const count = Number(result.value);
-                    if (!Number.isFinite(count) || count < 0) {
-                        throw new Error('Invalid like count response');
-                    }
-
+            incrementLikeCount()
+                .then(count => {
                     hasLiked = true;
                     localStorage.setItem(LIKE_FLAG_KEY, 'true');
                     cacheLikeCount(count);
