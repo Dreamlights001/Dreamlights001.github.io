@@ -35,16 +35,15 @@ export const resumeData = {
   ],
   research: [
     {
-      "title": "RoboParty · INTACT2Real & Benchmark Generation",
-      "role": "World Models / Dual-Arm Manipulation / Benchmark Generation",
-      "desc": "Participated in INTACT and built INTACT2Real, a JEPA-WAM sim-to-real system for dual-arm manipulation using RoboTwin 2.0 and PiPER. Responsible for RoboParty's benchmark generation project. Built agents to automatically generate high-fidelity robot training environments, verify the usability of scenes and tasks end to end, and align simulation scenes with real physical settings."
+      title: "RoboParty Lab · INTACT2Real & RoboHome Benchmark Generation",
+      role: "VLA Algorithm Intern · WAM Group (2026.7 - Present)",
+      desc: "Participated in the INTACT project, building INTACT2Real (a JEPA-WAM Sim2Real system for dual-arm manipulation on RoboTwin 2.0 and PiPER) and INTACT Real2Sim data collection. Responsible for RoboParty's self-developed benchmark generation project using agents for automated high-fidelity robot training environment generation and verification; co-led RoboHome, a whole-home simulation scene and motion/trajectory generation framework for humanoid long-horizon loco-manipulation (CVPR 2027 submission, Co-first Author, 2nd)."
     },
     {
-      "title": "Institute of Automation, Chinese Academy of Sciences · PiStar",
-      "role": "PiStar · Closed-Loop Robot Learning",
-      "desc": "Worked on PiStar, a closed-loop robot learning framework. Built a LIBERO workflow spanning demonstration-data conversion to the LeRobot format, policy training and rollout collection, VLM-based value modeling and advantage labeling, and iterative policy fine-tuning; the framework also supports Piper and RealMan physical robot platforms."
+      title: "Institute of Automation, Chinese Academy of Sciences · PiStar",
+      role: "Intern (2026.1 - 2026.6)",
+      desc: "Internship work centered on PiStar, a closed-loop robot learning framework. Built a LIBERO workflow spanning demonstration-data conversion to the LeRobot format, policy training and rollout collection, VLM-based value modeling and advantage labeling, and iterative policy fine-tuning."
     },
-
     {
       title: "Zero-Shot Industrial Defect Detection",
       role: "Lead Researcher",
@@ -52,6 +51,7 @@ export const resumeData = {
     }
   ],
   awards: [
+    "2026 Yizhi Cup Embodied AI Developer Challenge (Preliminary Simulation Round) - 1st Place, Industrial Manufacturing Track (Team Member, during CASIA Internship)",
     "2025 American Math Modeling Contest - H Prize",
     "2024 China Math Modeling Contest - Provincial First Prize",
     "2025 College Computer Design Competition - Provincial First Prize",
