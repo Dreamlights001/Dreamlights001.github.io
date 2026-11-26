@@ -31,7 +31,7 @@ export const resumeData = {
     { category: "AI & CV", items: ["PyTorch", "TensorFlow", "Transformers", "CLIP", "SAM", "VLM", "VLA", "Large Vision Models"] },
     { category: "Development", items: ["Python", "C/C++", "MATLAB", "Data Structures", "Git"] },
     { category: "Industrial", items: ["CAD", "CATIA", "SolidWorks", "PLC", "LabVIEW"] },
-    { category: "Simulation", items: ["Comsol", "Mujoco", "Simulink"] }
+    { category: "Simulation", items: ["Comsol", "Mujoco", "Isaac Sim", "Real2Sim", "Simulink"] }
   ],
   research: [
     {

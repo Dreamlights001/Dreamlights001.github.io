@@ -336,6 +336,8 @@
                                     <span class="tag">Comsol</span>
                                     <span class="tag">Simulink</span>
                                     <span class="tag">Mujoco</span>
+                                    <span class="tag">Isaac Sim</span>
+                                    <span class="tag">Real2Sim</span>
                                     <span class="tag">ROS 2</span>
                                     <span class="tag">Git</span>
                                     <span class="tag">Docker</span>
@@ -740,32 +742,91 @@
         let hasLiked = false;
         let likeRequestPending = false;
 
-        async function fetchLikeCount() {
-            const resp = await fetch(`${LIKE_API_BASE}/likes`, {
-                method: 'GET',
-                cache: 'no-store'
-            });
-            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-            const data = await resp.json();
-            const count = Number(data.value);
+        function parseLikeValue(data) {
+            const count = Number(data && data.value);
             if (!Number.isFinite(count) || count < 0) {
                 throw new Error('Invalid like count response');
             }
             return count;
         }
 
-        async function incrementLikeCount() {
-            const resp = await fetch(`${LIKE_API_BASE}/likes/up`, {
-                method: 'POST',
-                cache: 'no-store'
+        function requestLikeJsonp(path, timeoutMs = 8000) {
+            return new Promise((resolve, reject) => {
+                const cbName = `__likeCb_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+                const script = document.createElement('script');
+                let settled = false;
+
+                function cleanup() {
+                    clearTimeout(timer);
+                    try { delete window[cbName]; } catch (e) { window[cbName] = undefined; }
+                    if (script.parentNode) script.parentNode.removeChild(script);
+                }
+
+                const timer = setTimeout(() => {
+                    if (settled) return;
+                    settled = true;
+                    cleanup();
+                    reject(new Error('JSONP timeout'));
+                }, timeoutMs);
+
+                window[cbName] = data => {
+                    if (settled) return;
+                    settled = true;
+                    cleanup();
+                    try {
+                        resolve(parseLikeValue(data));
+                    } catch (err) {
+                        reject(err);
+                    }
+                };
+
+                script.onerror = () => {
+                    if (settled) return;
+                    settled = true;
+                    cleanup();
+                    reject(new Error('JSONP network error'));
+                };
+
+                script.src = `${LIKE_API_BASE}${path}?callback=${cbName}&t=${Date.now()}`;
+                script.async = true;
+                document.head.appendChild(script);
             });
-            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-            const data = await resp.json();
-            const count = Number(data.value);
-            if (!Number.isFinite(count) || count < 0) {
-                throw new Error('Invalid like count response');
+        }
+
+        async function requestLikeFetch(path, method = 'GET', timeoutMs = 8000) {
+            const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+            const timer = controller ? setTimeout(() => controller.abort(), timeoutMs) : null;
+            try {
+                const resp = await fetch(`${LIKE_API_BASE}${path}?t=${Date.now()}`, {
+                    method,
+                    mode: 'cors',
+                    signal: controller ? controller.signal : undefined
+                });
+                if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+                return parseLikeValue(await resp.json());
+            } finally {
+                if (timer) clearTimeout(timer);
             }
-            return count;
+        }
+
+        async function fetchLikeCount() {
+            try {
+                return await requestLikeFetch('/likes', 'GET');
+            } catch (err) {
+                return await requestLikeJsonp('/likes');
+            }
+        }
+
+        async function incrementLikeCount() {
+            try {
+                return await requestLikeFetch('/likes/up', 'POST');
+            } catch (postErr) {
+                try {
+                    return await requestLikeFetch('/likes/up', 'GET');
+                } catch (getErr) {
+                    return await requestLikeJsonp('/likes/up');
+                }
+            }
         }
 
         function getCachedLikeCount() {
