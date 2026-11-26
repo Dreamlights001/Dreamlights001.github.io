@@ -736,7 +736,10 @@
             if(target) observer.observe(target, config);
         });
 
-        const LIKE_API_BASE = 'https://likes.dreamlights.us.ci';
+        const ABACUS_BASE = 'https://abacus.jasoncameron.dev';
+        const ABACUS_NS = 'dreamlights001-github-io';
+        const ABACUS_KEY = 'resume-likes';
+        const FALLBACK_API_BASE = 'https://likes.dreamlights.us.ci';
         const LIKE_CACHE_KEY = 'resume_like_count';
         const LIKE_FLAG_KEY = 'resume_has_liked';
         let hasLiked = false;
@@ -750,7 +753,7 @@
             return count;
         }
 
-        function requestLikeJsonp(path, timeoutMs = 8000) {
+        function requestLikeJsonp(base, path, timeoutMs = 8000) {
             return new Promise((resolve, reject) => {
                 const cbName = `__likeCb_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
                 const script = document.createElement('script');
@@ -787,21 +790,22 @@
                     reject(new Error('JSONP network error'));
                 };
 
-                script.src = `${LIKE_API_BASE}${path}?callback=${cbName}&t=${Date.now()}`;
+                script.src = `${base}${path}?callback=${cbName}&t=${Date.now()}`;
                 script.async = true;
                 document.head.appendChild(script);
             });
         }
 
-        async function requestLikeFetch(path, method = 'GET', timeoutMs = 8000) {
+        async function fetchJsonWithTimeout(url, method = 'GET', timeoutMs = 8000, allow404AsZero = false) {
             const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
             const timer = controller ? setTimeout(() => controller.abort(), timeoutMs) : null;
             try {
-                const resp = await fetch(`${LIKE_API_BASE}${path}?t=${Date.now()}`, {
+                const resp = await fetch(url, {
                     method,
                     mode: 'cors',
                     signal: controller ? controller.signal : undefined
                 });
+                if (allow404AsZero && resp.status === 404) return 0;
                 if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
                 return parseLikeValue(await resp.json());
             } finally {
@@ -810,21 +814,29 @@
         }
 
         async function fetchLikeCount() {
+            const abacusUrl = `${ABACUS_BASE}/get/${ABACUS_NS}/${ABACUS_KEY}?t=${Date.now()}`;
             try {
-                return await requestLikeFetch('/likes', 'GET');
-            } catch (err) {
-                return await requestLikeJsonp('/likes');
+                return await fetchJsonWithTimeout(abacusUrl, 'GET', 8000, true);
+            } catch (primaryErr) {
+                try {
+                    return await fetchJsonWithTimeout(`${FALLBACK_API_BASE}/likes?t=${Date.now()}`, 'GET', 8000);
+                } catch (fallbackErr) {
+                    return await requestLikeJsonp(FALLBACK_API_BASE, '/likes');
+                }
             }
         }
 
         async function incrementLikeCount() {
+            const abacusUrl = `${ABACUS_BASE}/hit/${ABACUS_NS}/${ABACUS_KEY}?t=${Date.now()}`;
             try {
-                return await requestLikeFetch('/likes/up', 'POST');
-            } catch (postErr) {
+                const count = await fetchJsonWithTimeout(abacusUrl, 'GET', 8000);
+                fetchJsonWithTimeout(`${FALLBACK_API_BASE}/likes/up?t=${Date.now()}`, 'POST', 4000).catch(() => {});
+                return count;
+            } catch (primaryErr) {
                 try {
-                    return await requestLikeFetch('/likes/up', 'GET');
-                } catch (getErr) {
-                    return await requestLikeJsonp('/likes/up');
+                    return await fetchJsonWithTimeout(`${FALLBACK_API_BASE}/likes/up?t=${Date.now()}`, 'GET', 8000);
+                } catch (fallbackErr) {
+                    return await requestLikeJsonp(FALLBACK_API_BASE, '/likes/up');
                 }
             }
         }
@@ -895,7 +907,8 @@
                 })
                 .catch(error => {
                     console.error('Error updating like count:', error);
-                    alert(currentLang === 'zh' ? "点赞失败，请稍后再试。" : "Failed to like. Please try again later.");
+                    const detail = error && error.message ? ` (${error.message})` : '';
+                    alert(currentLang === 'zh' ? `点赞失败${detail}，请稍后再试。` : `Failed to like${detail}. Please try again later.`);
                 })
                 .finally(() => {
                     likeRequestPending = false;
@@ -903,11 +916,20 @@
                 });
         }
 
-        window.onload = () => {
+        function bootPage() {
             updateContent();
             initLikes();
             setTimeout(syncBusuanziData, 1000);
-        };
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', bootPage);
+        } else {
+            bootPage();
+        }
+        window.addEventListener('load', () => {
+            syncBusuanziData();
+        });
     </script>
 </body>
 </html>
